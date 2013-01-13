@@ -6,18 +6,22 @@ let maplocalleader = ","
 filetype plugin indent on
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
+" Need to set the git proto to http because cntlm is buggy 
+" on Linux Mint 11
+let vundle_default_git_proto = "http"
 
 " let Vundle manage Vundle required! 
 Bundle 'gmarik/vundle'
 
 " Github plugins
-Bundle 'ervandew/supertab.git'
-Bundle 'jamessan/vim-gnupg.git'
+Bundle 'ervandew/supertab'
+Bundle 'jamessan/vim-gnupg'
 Bundle 'msanders/snipmate.vim'
-Bundle 'othree/xml.vim.git'
+Bundle 'othree/xml.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/syntastic'
 Bundle 'vim-ruby/vim-ruby'
+Bundle 'vim-scripts/AutoClose'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
