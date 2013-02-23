@@ -14,6 +14,7 @@ let vundle_default_git_proto = "http"
 Bundle 'gmarik/vundle'
 
 " Github plugins
+Bundle 'altercation/vim-colors-solarized'
 Bundle 'ervandew/supertab'
 Bundle 'jamessan/vim-gnupg'
 Bundle 'msanders/snipmate.vim'
@@ -36,6 +37,7 @@ set shiftwidth=4
 set expandtab
 set autoindent
 set number
+set cursorline
 "Show the filename in the window
 set laststatus=2
 syntax on
@@ -63,3 +65,11 @@ autocmd Filetype xml setlocal tabstop=2
 autocmd Filetype xml setlocal softtabstop=2
 autocmd Filetype xml setlocal shiftwidth=2
 
+" Solarize Settings
+"let g:solarized_termcolors=256
+let g:solarized_visibility = "high"
+let g:solarized_contrast = "high"
+let g:solarized_termtrans = 1
+set background=dark
+
+colorscheme solarized
