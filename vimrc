@@ -27,7 +27,6 @@ Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 Bundle 'vim-ruby/vim-ruby'
-Bundle 'vim-scripts/AutoClose'
 
 " General configurations
 filetype plugin on

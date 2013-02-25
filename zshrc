@@ -39,11 +39,15 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/Users/jeff/.rbenv/shims:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/share/python
+
+# Adjust the path for Brew Installed python
+which brew > /dev/null && export PATH=$PATH:$(brew --prefix)/share/python
 
 # Don't print out history expansions, just do them
 unsetopt HIST_VERIFY
 
 # Slightly modify the colours
 export LSCOLORS="Fxfxcxdxbxegedabagacad"
+
+# Add the rbenv stuff
 eval "$(rbenv init -)"
