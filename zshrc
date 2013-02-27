@@ -50,4 +50,9 @@ unsetopt HIST_VERIFY
 export LSCOLORS="Fxfxcxdxbxegedabagacad"
 
 # Add the rbenv stuff
-eval "$(rbenv init -)"
+which rbenv > /dev/null && eval "$(rbenv init -)"
+
+# Add an alias to set the proxies
+LOCAL_PROXY="http://localhost:3128"
+alias set_proxy="export {all_proxy,http_proxy,https_proxy}=$LOCAL_PROXY" 
+alias unset_proxy="unset {all_proxy,http_proxy,https_proxy}"
