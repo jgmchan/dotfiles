@@ -42,7 +42,10 @@ set laststatus=2
 syntax on
 nnoremap <F2> :set number!<cr>
 map <F3> <Leader>c 
-hi LineNr ctermfg=darkgrey
+" Remap Esc
+imap ;; <Esc>
+" Bring up NerdTree easily
+map <leader>n :NERDTree<cr>
 
 " Python specific settings
 autocmd Filetype python setlocal tabstop=4
