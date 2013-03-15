@@ -12,6 +12,7 @@ ZSH_THEME="jeff"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ss="source ~/.zshrc"
+alias rake="noglob rake"
 
 # Set to this to use case-sensitive completion
 CASE_SENSITIVE="true"
@@ -56,3 +57,6 @@ which rbenv > /dev/null && eval "$(rbenv init -)"
 LOCAL_PROXY="http://localhost:3128"
 alias set_proxy="export {all_proxy,http_proxy,https_proxy}=$LOCAL_PROXY" 
 alias unset_proxy="unset {all_proxy,http_proxy,https_proxy}"
+
+# Export the .bin directory for bundler binstubs
+export PATH=.bin:$PATH
