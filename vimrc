@@ -2,22 +2,23 @@
 let mapleader = ","
 let maplocalleader = ","
 
-" Set up vundle
-filetype plugin indent on
+set nocompatible
+
+"Set up vundle
+filetype off 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
-" Need to set the git proto to http because cntlm is buggy 
-" on Linux Mint 11
-let vundle_default_git_proto = "http"
 
-" let Vundle manage Vundle required! 
+"Let Vundle manage Vundle required! 
 Bundle 'gmarik/vundle'
 
-" Github plugins
+"Github plugins
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'benmills/vimux'
 Bundle 'ervandew/supertab'
 Bundle 'jamessan/vim-gnupg'
 Bundle 'msanders/snipmate.vim'
+Bundle 'mileszs/ack.vim'
 Bundle 'othree/xml.vim'
 Bundle 'rodjek/vim-puppet'
 Bundle 'scrooloose/nerdcommenter'
@@ -26,52 +27,68 @@ Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
+Bundle 'tyok/nerdtree-ack'
 Bundle 'vim-ruby/vim-ruby'
 
+"Need to switch this back on afterwards
+filetype plugin indent on
+
+"""""""""""""""""""""""""
 " General configurations
-filetype plugin on
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set expandtab
-set autoindent
+"""""""""""""""""""""""""
+"Set some standard indent related stuff
+set expandtab autoindent
+set tabstop=4 softtabstop=4 shiftwidth=4 
+"Show line numbers by default
 set number
+"Highlight the line which the cursor is on
 set cursorline
+"Show cursor position
+set ruler
+"We should be able to backspace anyway in insert mode
+set backspace=indent,eol,start
 "Show the filename in the window
 set laststatus=2
+"Turn on the syntax highlighting
 syntax on
+"Allow paste toggling
+set pastetoggle=<F4>
+
+"""""""""""""""""""""""
+" Some custom mappings
+"""""""""""""""""""""""
+"Easily turn on and off the line numbers
 nnoremap <F2> :set number!<cr>
-map <F3> <Leader>c 
-" Remap Esc
+"Comment and uncomment the line (note the space at the end)
+map <F3> <leader>c 
+"Remap Esc
 imap ;; <Esc>
-" Bring up NerdTree easily
+"Bring up NerdTree easily
 map <leader>n :NERDTree<cr>
+"Switch list on and off
+map <leader>w :set list!<cr>
+"Map Vimux commands to easily execute commands
+map <leader><space> :VimuxRunLastCommand<cr>
+map <leader>f :VimuxPromptCommand<cr>
 
-" Python specific settings
-autocmd Filetype python setlocal tabstop=4
-autocmd Filetype python setlocal softtabstop=4
-autocmd Filetype python setlocal shiftwidth=4
+"""""""""""""""""""""""""""""
+" Filetype specific settings
+"""""""""""""""""""""""""""""
+"Python
+autocmd Filetype python setlocal tabstop=4 softtabstop=4 shiftwidth=4
 
-" Puppet specific settings
-autocmd Filetype puppet setlocal tabstop=2
-autocmd Filetype puppet setlocal softtabstop=2
-autocmd Filetype puppet setlocal shiftwidth=2
+"Ruby
+autocmd Filetype ruby setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
-" Ruby specific settings
-autocmd Filetype ruby setlocal tabstop=2
-autocmd Filetype ruby setlocal softtabstop=2
-autocmd Filetype ruby setlocal shiftwidth=2
+"XML
+autocmd Filetype xml setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
-" XML specific settings
-autocmd Filetype xml setlocal tabstop=2
-autocmd Filetype xml setlocal softtabstop=2
-autocmd Filetype xml setlocal shiftwidth=2
-
-" Solarize Settings
-"let g:solarized_termcolors=256
+"""""""""""""""""""""
+" Colours and themes
+"""""""""""""""""""""
+"Solarize
 let g:solarized_visibility = "high"
 let g:solarized_contrast = "high"
 let g:solarized_termtrans = 1
 set background=dark
-
 colorscheme solarized
