@@ -13,6 +13,7 @@ ZSH_THEME="jeff"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ss="source ~/.zshrc"
 alias rake="noglob rake"
+alias vi="vim"
 
 # Set to this to use case-sensitive completion
 CASE_SENSITIVE="true"
@@ -42,7 +43,12 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 
 # Adjust the path for Brew Installed python
-which brew > /dev/null && export PATH=$PATH:$(brew --prefix)/share/python
+which brew > /dev/null && export PATH=$(brew --prefix)/bin:$PATH
+which brew > /dev/null && export PATH=$(brew --prefix)/share/python:$PATH
+
+# Do some stuff for virtualenvwrapper
+export WORKON_HOME=~/.python_envs
+source /usr/local/share/python/virtualenvwrapper.sh
 
 # Don't print out history expansions, just do them
 unsetopt HIST_VERIFY
