@@ -38,7 +38,7 @@ filetype plugin indent on
 """""""""""""""""""""""""
 "Set some standard indent related stuff
 set expandtab autoindent
-set tabstop=4 softtabstop=4 shiftwidth=4 
+set tabstop=2 softtabstop=2 shiftwidth=2 
 "Show line numbers by default
 set number
 "Highlight the line which the cursor is on
@@ -76,12 +76,6 @@ map <leader>f :VimuxPromptCommand<cr>
 """""""""""""""""""""""""""""
 "Python
 autocmd Filetype python setlocal tabstop=4 softtabstop=4 shiftwidth=4
-
-"Ruby
-autocmd Filetype ruby setlocal tabstop=2 softtabstop=2 shiftwidth=2
-
-"XML
-autocmd Filetype xml setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 """""""""""""""""""""
 " Colours and themes
