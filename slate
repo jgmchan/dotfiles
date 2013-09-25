@@ -1,0 +1,68 @@
+#--------------------------------------------------------------------
+# Global 
+#--------------------------------------------------------------------
+config windowHintsShowIcons true
+config windowHintsIgnoreHiddenWindows false
+config windowHintsSpread true
+
+#--------------------------------------------------------------------
+# Aliases
+#--------------------------------------------------------------------
+# Modal key
+alias modal-key ctrl,'
+alias move-key ctrl,s
+
+# Some apps
+alias browser 'Google Chrome'
+alias irc 'LimeChat'
+alias terminal 'iTerm'
+alias email 'Microsoft Outlook'
+alias music 'iTunes'
+
+# Easy helpers for long variable names...
+alias sox screenOriginX
+alias soy screenOriginY
+alias ssx screenSizeX
+alias ssy screenSizeY
+
+# Positioning aliases
+alias full move ${sox};${soy} ${ssx};${ssy}
+alias left-half move ${sox};${soy} ${ssx}/2+1;${ssy}
+alias right-half move ${sox}+${ssx}/2;${soy} ${ssx}/2;${ssy}
+alias top-half move ${sox};${soy} ${ssx};${ssy}/2
+alias bot-half move ${sox};${soy}+${ssy}/2 ${ssx};${ssy}/2
+alias top-left-corner move ${sox};${soy} ${ssx}/2;${ssy}/2
+alias top-right-corner move ${sox}+${ssx}/2;${soy} ${ssx}/2;${ssy}/2
+alias bot-left-corner move ${sox};${soy}+${ssy}/2 ${ssx}/2;${ssy}/2
+alias bot-right-corner move ${sox}+${ssx}/2;${soy}+${ssy}/2 ${ssx}/2;${ssy}/2
+
+#--------------------------------------------------------------------
+# Layouts 
+#--------------------------------------------------------------------
+#layout single-monitor ${tomatoes} ${right-half}
+#layout single-monitor ${twitter} ${full} 
+
+#--------------------------------------------------------------------
+# Bindings 
+#--------------------------------------------------------------------
+# Move windows to certain locations on the screen
+bind f:${move-key} ${full}
+bind h:${move-key} ${left-half}
+bind l:${move-key} ${right-half}
+bind j:${move-key} ${bot-half}
+bind k:${move-key} ${top-half}
+bind u:${move-key} ${top-left-corner}
+bind o:${move-key} ${top-right-corner}
+bind m:${move-key} ${bot-left-corner}
+bind .:${move-key} ${bot-right-corner}
+
+# Focus helpers
+bind b:${modal-key} focus ${browser}
+bind i:${modal-key} focus ${irc}
+bind t:${modal-key} focus ${terminal}
+bind e:${modal-key} focus ${email}
+bind m:${modal-key} focus ${music}
+bind ;:${modal-key} hint asfd;lkj
+
+# Layouts
+#bind 1:${modal-key} sequence layout single-monitor
