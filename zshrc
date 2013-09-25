@@ -66,3 +66,13 @@ alias unset_proxy="unset {all_proxy,http_proxy,https_proxy}"
 
 # Export the .bin directory for bundler binstubs
 export PATH=.bin:$PATH
+
+# Source the z configuration
+. `brew --prefix`/etc/profile.d/z.sh
+
+# Lets try using the Vim bindings :)
+set -o vi
+bindkey "^R" history-incremental-search-backward
+
+# Turn on rednose for python nosetest
+NOSE_REDNOSE=1
