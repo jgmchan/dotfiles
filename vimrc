@@ -17,6 +17,8 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'benmills/vimux'
 Bundle 'ervandew/supertab'
 Bundle 'jamessan/vim-gnupg'
+Bundle 'jnwhiteh/vim-golang'
+Bundle 'majutsushi/tagbar'
 Bundle 'msanders/snipmate.vim'
 Bundle 'mileszs/ack.vim'
 Bundle 'othree/xml.vim'
@@ -28,6 +30,7 @@ Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 Bundle 'tyok/nerdtree-ack'
+Bundle 'Valloric/YouCompleteMe'
 Bundle 'vim-ruby/vim-ruby'
 
 "Need to switch this back on afterwards
@@ -70,12 +73,22 @@ map <leader>w :set list!<cr>
 "Map Vimux commands to easily execute commands
 map <leader><space> :VimuxRunLastCommand<cr>
 map <leader>f :VimuxPromptCommand<cr>
+"Bring up Tagbar
+map <leader>t :TagbarToggle<cr>
+"Switch from single to double quote and vice versa
+map <leader>' cs"'
+map <leader>" cs'"
 
 """""""""""""""""""""""""""""
 " Filetype specific settings
 """""""""""""""""""""""""""""
 "Python
 autocmd Filetype python setlocal tabstop=4 softtabstop=4 shiftwidth=4
+
+"""""""""""""""""""""""""""""
+" Plugin specific settings
+"""""""""""""""""""""""""""""
+let NERDTreeIgnore = ['\.pyc$']
 
 """""""""""""""""""""
 " Colours and themes
