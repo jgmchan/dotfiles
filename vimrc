@@ -84,6 +84,8 @@ map <leader>" cs'"
 """""""""""""""""""""""""""""
 "Python
 autocmd Filetype python setlocal tabstop=4 softtabstop=4 shiftwidth=4
+"Eyaml
+autocmd BufNewFile,BufRead *.eyaml set filetype=yaml
 
 """""""""""""""""""""""""""""
 " Plugin specific settings
