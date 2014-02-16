@@ -16,10 +16,13 @@ Bundle 'gmarik/vundle'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'benmills/vimux'
 Bundle 'ervandew/supertab'
+Bundle 'garbas/vim-snipmate'
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle 'honza/vim-snippets'
 Bundle 'jamessan/vim-gnupg'
 Bundle 'jnwhiteh/vim-golang'
 Bundle 'majutsushi/tagbar'
-Bundle 'msanders/snipmate.vim'
 Bundle 'mileszs/ack.vim'
 Bundle 'othree/xml.vim'
 Bundle 'rodjek/vim-puppet'
@@ -30,6 +33,7 @@ Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 Bundle 'tyok/nerdtree-ack'
+Bundle 'undx/vim-gocode'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'vim-ruby/vim-ruby'
 
@@ -82,6 +86,8 @@ map <leader>" cs'"
 """""""""""""""""""""""""""""
 " Filetype specific settings
 """""""""""""""""""""""""""""
+"Golang
+autocmd Filetype go setlocal tabstop=8 softtabstop=0 shiftwidth=0 noexpandtab
 "Python
 autocmd Filetype python setlocal tabstop=4 softtabstop=4 shiftwidth=4
 "Eyaml
@@ -101,3 +107,9 @@ let g:solarized_contrast = "high"
 let g:solarized_termtrans = 1
 set background=dark
 colorscheme solarized
+
+"""""""""""""""""""""""""
+" Snipmate Configuration
+"""""""""""""""""""""""""
+imap <C-k> <esc>a<Plug>snipMateNextOrTrigger
+smap <C-k> <Plug>snipMateNextOrTrigger

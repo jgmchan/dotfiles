@@ -44,11 +44,10 @@ source $ZSH/oh-my-zsh.sh
 
 # Adjust the path for Brew Installed python
 which brew > /dev/null && export PATH=$(brew --prefix)/bin:$PATH
-which brew > /dev/null && export PATH=$(brew --prefix)/share/python:$PATH
 
 # Do some stuff for virtualenvwrapper
 export WORKON_HOME=~/.python_envs
-source /usr/local/share/python/virtualenvwrapper.sh
+source $(brew --prefix)/bin/virtualenvwrapper.sh
 
 # Don't print out history expansions, just do them
 unsetopt HIST_VERIFY
@@ -67,6 +66,9 @@ alias unset_proxy="unset {all_proxy,http_proxy,https_proxy}"
 # Export the .bin directory for bundler binstubs
 export PATH=.bin:$PATH
 
+# Add the ovftool
+export PATH=/Applications/VMware\ OVF\ Tool:$PATH
+
 # Source the z configuration
 . `brew --prefix`/etc/profile.d/z.sh
 
@@ -76,3 +78,19 @@ bindkey "^R" history-incremental-search-backward
 
 # Turn on rednose for python nosetest
 NOSE_REDNOSE=1
+
+# Set up the gpg-agent
+#if [ ! -f "${HOME}/.gpg-agent-info" ]; then
+  #gpg-agent --daemon --write-env-file "${HOME}/.gpg-agent-info"
+#fi
+
+#if [ -f "${HOME}/.gpg-agent-info" ]; then
+    #. "${HOME}/.gpg-agent-info"
+    #export GPG_AGENT_INFO
+    #export SSH_AUTH_SOCK
+    #export SSH_AGENT_PID
+#fi
+
+# Set up my GOPATH
+export GOPATH=~/workspace/scm/go
+export PATH=$PATH:$GOPATH/bin
