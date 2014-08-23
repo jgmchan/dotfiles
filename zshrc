@@ -93,4 +93,7 @@ NOSE_REDNOSE=1
 
 # Set up my GOPATH
 export GOPATH=~/workspace/scm/go
-export PATH=$PATH:$GOPATH/bin
+export PATH=$GOPATH/bin:$PATH
+
+# Set up boot2docker
+export DOCKER_HOST=tcp://$(boot2docker ip 2>/dev/null):2375

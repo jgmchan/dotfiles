@@ -16,19 +16,20 @@ Bundle 'gmarik/vundle'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'benmills/vimux'
 Bundle 'ervandew/supertab'
-Bundle 'garbas/vim-snipmate'
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
+Bundle 'elzr/vim-json'
 Bundle 'honza/vim-snippets'
 Bundle 'jamessan/vim-gnupg'
+Bundle 'jmcantrell/vim-virtualenv'
 Bundle 'jnwhiteh/vim-golang'
 Bundle 'majutsushi/tagbar'
 Bundle 'mileszs/ack.vim'
+Bundle 'moll/vim-node'
 Bundle 'othree/xml.vim'
 Bundle 'rodjek/vim-puppet'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
+Bundle 'SirVer/ultisnips'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
@@ -60,6 +61,8 @@ set laststatus=2
 syntax on
 "Allow paste toggling
 set pastetoggle=<F4>
+" Activate modeline so we can use file specific settings
+set modeline
 
 """""""""""""""""""""""
 " Some custom mappings
@@ -68,8 +71,6 @@ set pastetoggle=<F4>
 nnoremap <F2> :set number!<cr>
 "Comment and uncomment the line (note the space at the end)
 map <F3> <leader>c 
-"Remap Esc
-imap ;; <Esc>
 "Bring up NerdTree easily
 map <leader>n :NERDTree<cr>
 "Switch list on and off
@@ -109,7 +110,56 @@ set background=dark
 colorscheme solarized
 
 """""""""""""""""""""""""
-" Snipmate Configuration
+" UltiSnipsConfiguration
 """""""""""""""""""""""""
-imap <C-k> <esc>a<Plug>snipMateNextOrTrigger
-smap <C-k> <Plug>snipMateNextOrTrigger
+let g:UltiSnipsExpandTrigger = "<c-k>"
+let g:UltiSnipsJumpForwardTrigger = "<c-k>"
+let g:UltiSnipsJumpBackwardTrigger = "<c-h>"
+
+
+""""""""""""""""""""""""""""""
+" YouCompleteMe Configuration
+""""""""""""""""""""""""""""""
+set completeopt=menu,menuone
+
+""""""""""""""""""""""""""""""
+" Golang Configuration
+""""""""""""""""""""""""""""""
+" Set tagbar to generate Golang CTags
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+    \ }
+
+"""""""""""""""""""""""
+" Tagbar configuration
+"""""""""""""""""""""""
+let g:tagbar_type_asciidoc = {
+    \ 'ctagstype' : 'asciidoc',
+    \ 'kinds' : [
+        \ 's:Table of Contents'
+    \ ]
+\ }
