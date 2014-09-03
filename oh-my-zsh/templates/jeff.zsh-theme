@@ -28,7 +28,7 @@ else
 fi
 
 # Work out the python version
-python_env="%{$fg[blue]%}<$(python --version 2>&1 | awk '{print $2}')>%{$reset_color%}"
+local python_env="%{$fg[blue]%}<$(python --version 2>&1 | awk '{print $2}')>%{$reset_color%}"
 
 # Git plugin stuff
 local git_branch='$(git_prompt_username)$(git_prompt_info)%{$reset_color%}'
