@@ -6,37 +6,36 @@ set nocompatible
 
 "Set up vundle
 filetype off 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
 "Let Vundle manage Vundle required! 
-Bundle 'gmarik/vundle'
-
+Plugin 'gmarik/Vundle.vim'
 "Github plugins
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'benmills/vimux'
-Bundle 'ervandew/supertab'
-Bundle 'elzr/vim-json'
-Bundle 'honza/vim-snippets'
-Bundle 'jamessan/vim-gnupg'
-Bundle 'jmcantrell/vim-virtualenv'
-Bundle 'jnwhiteh/vim-golang'
-Bundle 'majutsushi/tagbar'
-Bundle 'mileszs/ack.vim'
-Bundle 'moll/vim-node'
-Bundle 'othree/xml.vim'
-Bundle 'rodjek/vim-puppet'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/syntastic'
-Bundle 'SirVer/ultisnips'
-Bundle 'tpope/vim-endwise'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-surround'
-Bundle 'tyok/nerdtree-ack'
-Bundle 'undx/vim-gocode'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'vim-ruby/vim-ruby'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'benmills/vimux'
+Plugin 'ervandew/supertab'
+Plugin 'elzr/vim-json'
+Plugin 'honza/vim-snippets'
+Plugin 'jamessan/vim-gnupg'
+Plugin 'jmcantrell/vim-virtualenv'
+Plugin 'jnwhiteh/vim-golang'
+Plugin 'majutsushi/tagbar'
+Plugin 'mileszs/ack.vim'
+Plugin 'moll/vim-node'
+Plugin 'othree/xml.vim'
+Plugin 'rodjek/vim-puppet'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'SirVer/ultisnips'
+Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+Plugin 'tyok/nerdtree-ack'
+Plugin 'undx/vim-gocode'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'vim-ruby/vim-ruby'
+call vundle#end()
 
 "Need to switch this back on afterwards
 filetype plugin indent on
