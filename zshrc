@@ -55,8 +55,10 @@ unsetopt HIST_VERIFY
 # Slightly modify the colours
 export LSCOLORS="Fxfxcxdxbxegedabagacad"
 
-# Add the rbenv stuff
-which rbenv > /dev/null && eval "$(rbenv init -)"
+
+# Configure chruby
+source /usr/local/opt/chruby/share/chruby/chruby.sh
+source /usr/local/opt/chruby/share/chruby/auto.sh
 
 # Add an alias to set the proxies
 LOCAL_PROXY="http://localhost:3128"
@@ -72,7 +74,7 @@ export PATH=/Applications/VMware\ OVF\ Tool:$PATH
 # Source the z configuration
 . `brew --prefix`/etc/profile.d/z.sh
 
-# Lets try using the Vim bindings :)
+# Set Vim bindings
 set -o vi
 bindkey "^R" history-incremental-search-backward
 
