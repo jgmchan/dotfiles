@@ -18,14 +18,7 @@ local user_host='%{$fg[green]%}%n@%m%{$reset_color%}'
 local current_dir='%{$terminfo[bold]$fg[blue]%} %~%{$reset_color%}'
 
 # Work out which version of ruby is being used
-local ruby_version=''
-if which rvm-prompt &> /dev/null; then
-  ruby_version='%{$fg[red]%}‹$(rvm-prompt i v g)›%{$reset_color%}'
-else
-  if which rbenv &> /dev/null; then
-    ruby_version='%{$fg[red]%}‹$(rbenv version | sed -e "s/ (set.*$//")›%{$reset_color%}'
-  fi
-fi
+local ruby_version="%{$fg[red]%}‹$(ruby --version | awk '{print $2}')›%{$reset_color%}"
 
 # Work out the python version
 local python_env="%{$fg[blue]%}<$(python --version 2>&1 | awk '{print $2}')>%{$reset_color%}"
