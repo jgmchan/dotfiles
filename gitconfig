@@ -1,0 +1,23 @@
+[user]
+  name = jgmchan
+  email = jgmchan@gmail.com
+
+[alias]
+  st = status
+  ci = commit
+  co = checkout
+
+[core]
+	editor = /usr/local/bin/vim
+
+[http]
+  sslVerify = false
+    
+[push]
+	default = simple
+
+[color]
+	ui = true
+
+[credential]
+	helper = osxkeychain
