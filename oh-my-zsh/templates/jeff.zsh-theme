@@ -18,17 +18,17 @@ local user_host='%{$fg[green]%}%n@%m%{$reset_color%}'
 local current_dir='%{$terminfo[bold]$fg[blue]%} %~%{$reset_color%}'
 
 # Work out which version of ruby is being used
-local ruby_version="%{$fg[red]%}‹$(ruby --version | awk '{print $2}')›%{$reset_color%}"
+local ruby_version='%{$fg[red]%}‹$(ruby --version | awk '\''{print $2}'\'')›%{$reset_color%}'
 
 # Work out the python version
-local python_env="%{$fg[blue]%}<$(python --version 2>&1 | awk '{print $2}')>%{$reset_color%}"
+local python_env='%{$fg[blue]%}<$(python --version 2>&1 | awk '\''{print $2}'\'')>%{$reset_color%}'
 
 # Git plugin stuff
 local git_branch='$(git_prompt_username)$(git_prompt_info)%{$reset_color%}'
 
 # And assemble everything together 
-PROMPT="╭─${user_host} ${git_branch}${current_dir}  
-╰─%{$fg[blue]%}$%{$reset_color%} "
+PROMPT="${user_host} ${git_branch}${current_dir}
+%{$fg[blue]%}$%{$reset_color%} "
 RPS1="${return_code}"
 # Show some useful info in the right prompt
 RPROMPT="${ruby_version} ${python_env}"
