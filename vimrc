@@ -69,7 +69,7 @@ set modeline
 "Easily turn on and off the line numbers
 nnoremap <F2> :set number!<cr>
 "Comment and uncomment the line (note the space at the end)
-map <F3> <leader>c 
+map <leader>a <leader>c 
 "Bring up NerdTree easily
 map <leader>n :NERDTree<cr>
 "Switch list on and off
