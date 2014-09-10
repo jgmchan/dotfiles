@@ -55,7 +55,6 @@ unsetopt HIST_VERIFY
 # Slightly modify the colours
 export LSCOLORS="Fxfxcxdxbxegedabagacad"
 
-
 # Configure chruby
 source /usr/local/opt/chruby/share/chruby/chruby.sh
 source /usr/local/opt/chruby/share/chruby/auto.sh
