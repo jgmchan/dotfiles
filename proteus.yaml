@@ -1,0 +1,25 @@
+# Can only be equals at the moment
+- rules:
+    remote_origin: git.ae.sda.corp.telstra.com
+  config:
+    user.name: Jeffrey Chan (d328626)
+    user.email: jeffrey.chan@team.telstra.com
+
+- rules:
+    remote_origin: git02.ae.sda.corp.telstra.com
+  config:
+    user.name: Jeffrey Chan (d328626)
+    user.email: jeffrey.chan@team.telstra.com
+
+- rules:
+    remote_origin: bitbucket.org
+  config:
+    user.name: Marji Cermak
+    user.email: marji@morpht.com
+
+- rules:
+    remote_origin: github.com
+  config:
+    user.name: jgmchan
+    user.email: jgmchan@gmail.com
+
