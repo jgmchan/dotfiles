@@ -76,7 +76,7 @@ map <leader>n :NERDTree<cr>
 map <leader>w :set list!<cr>
 "Map Vimux commands to easily execute commands
 map <leader><space> :VimuxRunLastCommand<cr>
-map <leader>f :VimuxPromptCommand<cr>
+map <leader>f :VimuxPromptCommand('')<cr>
 "Bring up Tagbar
 map <leader>t :TagbarToggle<cr>
 "Switch from single to double quote and vice versa
