@@ -1,0 +1,7 @@
+--langdef=asciidoc
+--langmap=asciidoc:.ad.adoc.asciidoc
+--regex-asciidoc=/^=[ \t]+(.*)/# \1/s,Section_L0/
+--regex-asciidoc=/^==[ \t]+(.*)/. \1/s,Section_L1/
+--regex-asciidoc=/^===[ \t]+(.*)/. . \1/s,Section_L2/
+--regex-asciidoc=/^====[ \t]+(.*)/. . . \1/s,Section_L3/
+--regex-asciidoc=/^=====[ \t]+(.*)/. . . . \1/s,Section_L4/
