@@ -101,3 +101,8 @@ export DOCKER_HOST=tcp://$(boot2docker ip 2>/dev/null):2375
 
 # Set the default ruby to be 2.1.0
 chruby 2.1.0
+
+# Set some aliases for Docker
+dr() {
+  docker run -i -t $@ /bin/bash
+}
