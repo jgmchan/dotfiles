@@ -11,6 +11,7 @@ call vundle#begin()
 "Let Vundle manage Vundle required! 
 Plugin 'gmarik/Vundle.vim'
 "Github plugins
+Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'benmills/vimux'
 Plugin 'ervandew/supertab'
@@ -93,6 +94,8 @@ autocmd Filetype go setlocal tabstop=8 softtabstop=0 shiftwidth=0 noexpandtab
 autocmd Filetype python setlocal tabstop=4 softtabstop=4 shiftwidth=4
 "Eyaml
 autocmd BufNewFile,BufRead *.eyaml set filetype=yaml
+"Markdown
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 """""""""""""""""""""""""""""
 " Plugin specific settings
@@ -163,3 +166,8 @@ let g:tagbar_type_asciidoc = {
         \ 's:Table of Contents'
     \ ]
 \ }
+
+"""""""""""""""""""""""""""
+" Git-gutter configuration
+"""""""""""""""""""""""""""
+let g:gitgutter_updatetime = 750
