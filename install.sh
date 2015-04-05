@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Install the dotfiles to their rightful place
-for file in proteus.yaml gitconfig slate tmux.conf vimrc zshrc; do
+for file in proteus.yaml gitconfig slate tmux.conf vimrc zshrc ctags; do
   ln -f -s $PWD/$file ~/.$file
 done
 
