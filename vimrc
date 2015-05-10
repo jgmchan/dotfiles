@@ -25,8 +25,7 @@ Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'jamessan/vim-gnupg'
-Plugin 'undx/vim-gocode'
-Plugin 'jnwhiteh/vim-golang'
+Plugin 'fatih/vim-go'
 Plugin 'elzr/vim-json'
 Plugin 'moll/vim-node'
 Plugin 'rodjek/vim-puppet'
@@ -128,6 +127,13 @@ set completeopt=menu,menuone
 """"""""""""""""""""""""""""""
 " Golang Configuration
 """"""""""""""""""""""""""""""
+" Enable more syntax highlighting
+let g:go_highlight_operators = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_build_constraints= 1
+
 " Set tagbar to generate Golang CTags
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',

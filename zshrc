@@ -98,7 +98,7 @@ export PATH=$GOPATH/bin:$PATH
 
 # Set up boot2docker
 export DOCKER_HOST=tcp://$(boot2docker ip 2>/dev/null):2376
-export DOCKER_CERT_PATH=~/.docker/boot2docker-vm
+export DOCKER_CERT_PATH=~/.boot2docker/certs/boot2docker-vm
 export DOCKER_TLS_VERIFY=1
 
 # Set the default ruby to be 2.1.0
