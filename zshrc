@@ -1,4 +1,4 @@
-# Path to your oh-my-zsh configuration.  
+# Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
@@ -45,9 +45,8 @@ source $ZSH/oh-my-zsh.sh
 # Adjust the path for Brew Installed python
 which brew > /dev/null && export PATH=$(brew --prefix)/bin:$PATH
 
-# Do some stuff for virtualenvwrapper
-export WORKON_HOME=~/.python_envs
-source $(brew --prefix)/bin/virtualenvwrapper.sh
+# Set up pyenv
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 
 # Don't print out history expansions, just do them
 unsetopt HIST_VERIFY
@@ -58,11 +57,6 @@ export LSCOLORS="Fxfxcxdxbxegedabagacad"
 # Configure chruby
 source /usr/local/opt/chruby/share/chruby/chruby.sh
 source /usr/local/opt/chruby/share/chruby/auto.sh
-
-# Add an alias to set the proxies
-LOCAL_PROXY="http://localhost:3128"
-alias set_proxy="export {all_proxy,http_proxy,https_proxy}=$LOCAL_PROXY" 
-alias unset_proxy="unset {all_proxy,http_proxy,https_proxy}"
 
 # Export the .bin directory for bundler binstubs
 export PATH=.bin:$PATH
@@ -79,18 +73,6 @@ bindkey "^R" history-incremental-search-backward
 
 # Turn on rednose for python nosetest
 NOSE_REDNOSE=1
-
-# Set up the gpg-agent
-#if [ ! -f "${HOME}/.gpg-agent-info" ]; then
-  #gpg-agent --daemon --write-env-file "${HOME}/.gpg-agent-info"
-#fi
-
-#if [ -f "${HOME}/.gpg-agent-info" ]; then
-    #. "${HOME}/.gpg-agent-info"
-    #export GPG_AGENT_INFO
-    #export SSH_AUTH_SOCK
-    #export SSH_AGENT_PID
-#fi
 
 # Set up my GOPATH
 export GOPATH=~/workspace/scm/go
@@ -111,3 +93,11 @@ dr() {
 
 # Set the JAVA_HOME
 export JAVA_HOME=`/usr/libexec/java_home`
+
+# Source some stuff for work
+alias set_prod='source ~/.zshrc.arbor_prod'
+alias set_test='source ~/.zshrc.arbor_test'
+
+# Add some keys to the current shell
+ssh-add ~/.ssh/cfn_mayhem_production_rsa
+ssh-add ~/.ssh/cfn_mayhem_staging_rsa

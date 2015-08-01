@@ -64,6 +64,11 @@ syntax on
 set pastetoggle=<F4>
 " Activate modeline so we can use file specific settings
 set modeline
+" Bring up NerdTree on startup
+autocmd VimEnter * NERDTree
+autocmd VimEnter * wincmd p
+" Remove whitespace on write
+autocmd BufWritePre * :%s/\s\+$//e
 
 """""""""""""""""""""""
 " Some custom mappings
@@ -96,6 +101,8 @@ autocmd Filetype python setlocal tabstop=4 softtabstop=4 shiftwidth=4
 autocmd BufNewFile,BufRead *.eyaml set filetype=yaml
 "Markdown
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+"CloudFormation
+autocmd BufNewFile,BufReadPost *.template set filetype=json
 
 """""""""""""""""""""""""""""
 " Plugin specific settings

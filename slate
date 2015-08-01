@@ -14,10 +14,10 @@ alias move-key ctrl,s
 
 # Some apps
 alias browser 'Google Chrome'
-alias irc 'LimeChat'
+alias irc 'Slack'
 alias terminal 'iTerm'
-alias email 'Microsoft Outlook'
 alias music 'iTunes'
+alias ide 'IntelliJ IDEA'
 
 # Easy helpers for long variable names...
 alias sox screenOriginX
@@ -58,9 +58,9 @@ bind .:${move-key} ${bot-right-corner}
 
 # Focus helpers
 bind b:${modal-key} focus ${browser}
-bind i:${modal-key} focus ${irc}
-bind t:${modal-key} focus ${terminal}
-bind e:${modal-key} focus ${email}
+bind j:${modal-key} focus ${terminal}
+bind i:${modal-key} focus ${ide}
+bind s:${modal-key} focus ${irc}
 bind m:${modal-key} focus ${music}
 bind ;:${modal-key} hint asfd;lkj
 
