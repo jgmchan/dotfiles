@@ -105,3 +105,5 @@ ssh-add ~/.ssh/cfn_mayhem_staging_rsa
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

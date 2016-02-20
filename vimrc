@@ -11,18 +11,26 @@ call vundle#begin()
 "Let Vundle manage Vundle required!
 Plugin 'gmarik/Vundle.vim'
 "Github plugins
+"Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
 Plugin 'mileszs/ack.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
+" Plugin 'mattn/emmet-vim'
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
 Plugin 'robbles/logstash.vim'
-Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tyok/nerdtree-ack'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'saltstack/salt-vim'
 Plugin 'ervandew/supertab'
 Plugin 'scrooloose/syntastic'
 Plugin 'majutsushi/tagbar'
+Plugin 'tomtom/tcomment_vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'smerrill/vcl-vim-plugin'
 Plugin 'altercation/vim-colors-solarized'
+" Plugin 'ryanoasis/vim-devicons'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-fugitive'
@@ -206,3 +214,5 @@ let g:syntastic_json_checkers=['jsonlint']
 
 "let g:indentLine_enabled = 0
 "map <leader>s :IndentLinesToggle<cr>
+let g:vim_markdown_folding_disabled = 1
+
