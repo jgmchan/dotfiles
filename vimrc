@@ -5,13 +5,14 @@ let maplocalleader = ","
 set nocompatible
 
 "Set up vundle
-filetype off 
+filetype off
 set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin()
-"Let Vundle manage Vundle required! 
+"Let Vundle manage Vundle required!
 Plugin 'gmarik/Vundle.vim'
 "Github plugins
 Plugin 'mileszs/ack.vim'
+Plugin 'robbles/logstash.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tyok/nerdtree-ack'
@@ -22,15 +23,20 @@ Plugin 'majutsushi/tagbar'
 Plugin 'SirVer/ultisnips'
 Plugin 'smerrill/vcl-vim-plugin'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'elixir-lang/vim-elixir'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'jamessan/vim-gnupg'
 Plugin 'fatih/vim-go'
+Plugin 'nathanaelkane/vim-indent-guides'
+"Plugin 'Yggdroot/indentLine'
+Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'elzr/vim-json'
 Plugin 'moll/vim-node'
 Plugin 'rodjek/vim-puppet'
 Plugin 'vim-ruby/vim-ruby'
+Plugin 'derekwyatt/vim-scala'
 Plugin 'honza/vim-snippets'
 Plugin 'tpope/vim-surround'
 Plugin 'jmcantrell/vim-virtualenv'
@@ -47,7 +53,7 @@ filetype plugin indent on
 """""""""""""""""""""""""
 "Set some standard indent related stuff
 set expandtab autoindent
-set tabstop=2 softtabstop=2 shiftwidth=2 
+set tabstop=2 softtabstop=2 shiftwidth=2
 "Show line numbers by default
 set number
 "Highlight the line which the cursor is on
@@ -76,7 +82,7 @@ autocmd BufWritePre * :%s/\s\+$//e
 "Easily turn on and off the line numbers
 nnoremap <F2> :set number!<cr>
 "Comment and uncomment the line (note the space at the end)
-map <leader>a <leader>c 
+map <leader>a <leader>c
 "Bring up NerdTree easily
 map <leader>n :NERDTree<cr>
 "Switch list on and off
@@ -185,3 +191,18 @@ let g:tagbar_type_asciidoc = {
 " Git-gutter configuration
 """""""""""""""""""""""""""
 let g:gitgutter_updatetime = 750
+
+let g:syntastic_json_checkers=['jsonlint']
+
+""""""""""""""
+" Indentation
+""""""""""""""
+"map <leader>s :IndentLinesToggle<cr>
+"
+"let g:indentLine_color_term = 6
+"let g:indentLine_color_gui = '#1c1c1c'
+"let g:indentLine_color_tty_light = 7
+"let g:indentLine_color_dark = 1
+
+"let g:indentLine_enabled = 0
+"map <leader>s :IndentLinesToggle<cr>

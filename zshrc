@@ -78,10 +78,8 @@ NOSE_REDNOSE=1
 export GOPATH=~/workspace/scm/go
 export PATH=$GOPATH/bin:$PATH
 
-# Set up boot2docker
-export DOCKER_HOST=tcp://$(boot2docker ip 2>/dev/null):2376
-export DOCKER_CERT_PATH=~/.boot2docker/certs/boot2docker-vm
-export DOCKER_TLS_VERIFY=1
+# Set up docker-machine
+eval $(docker-machine env)
 
 # Set the default ruby to be 2.1.0
 chruby 2.1.0
@@ -97,7 +95,13 @@ export JAVA_HOME=`/usr/libexec/java_home`
 # Source some stuff for work
 alias set_prod='source ~/.zshrc.arbor_prod'
 alias set_test='source ~/.zshrc.arbor_test'
+alias set_sync='source ~/.zshrc.arbor_sync'
 
 # Add some keys to the current shell
 ssh-add ~/.ssh/cfn_mayhem_production_rsa
 ssh-add ~/.ssh/cfn_mayhem_staging_rsa
+
+# NVM
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+
