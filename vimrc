@@ -4,57 +4,67 @@ let maplocalleader = ","
 
 set nocompatible
 
-"Set up vundle
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#begin()
-"Let Vundle manage Vundle required!
-Plugin 'gmarik/Vundle.vim'
-"Github plugins
-"Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'mileszs/ack.vim'
-Plugin 'ctrlpvim/ctrlp.vim'
-" Plugin 'mattn/emmet-vim'
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
-Plugin 'robbles/logstash.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'tyok/nerdtree-ack'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'saltstack/salt-vim'
-Plugin 'ervandew/supertab'
-Plugin 'scrooloose/syntastic'
-Plugin 'majutsushi/tagbar'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'SirVer/ultisnips'
-Plugin 'smerrill/vcl-vim-plugin'
-Plugin 'altercation/vim-colors-solarized'
-" Plugin 'ryanoasis/vim-devicons'
-Plugin 'elixir-lang/vim-elixir'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'jamessan/vim-gnupg'
-Plugin 'fatih/vim-go'
-Plugin 'nathanaelkane/vim-indent-guides'
-"Plugin 'Yggdroot/indentLine'
-Plugin 'Glench/Vim-Jinja2-Syntax'
-Plugin 'elzr/vim-json'
-Plugin 'moll/vim-node'
-Plugin 'rodjek/vim-puppet'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'derekwyatt/vim-scala'
-Plugin 'honza/vim-snippets'
-Plugin 'tpope/vim-surround'
-Plugin 'jmcantrell/vim-virtualenv'
-Plugin 'benmills/vimux'
-Plugin 'othree/xml.vim'
-Plugin 'Valloric/YouCompleteMe'
-call vundle#end()
+"Set up vim-plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
 
-"Need to switch this back on afterwards
-filetype plugin indent on
+call plug#begin('~/.vim/plugged')
+
+"Github plugins
+"
+" General Workflow
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ervandew/supertab'
+Plug 'scrooloose/syntastic'
+Plug 'majutsushi/tagbar'
+Plug 'tomtom/tcomment_vim'
+Plug 'SirVer/ultisnips'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'honza/vim-snippets'
+Plug 'tpope/vim-surround'
+Plug 'jmcantrell/vim-virtualenv'
+Plug 'Valloric/YouCompleteMe'
+"Plug 'godlygeek/tabular'
+"Plug 'mattn/emmet-vim'
+"Plug 'Yggdroot/indentLine'
+
+" Language specific (syntax highlighting etc.)
+Plug 'plasticboy/vim-markdown'
+Plug 'robbles/logstash.vim'
+Plug 'saltstack/salt-vim'
+Plug 'smerrill/vcl-vim-plugin'
+Plug 'elzr/vim-json'
+Plug 'moll/vim-node'
+Plug 'rodjek/vim-puppet'
+Plug 'vim-ruby/vim-ruby'
+Plug 'derekwyatt/vim-scala'
+Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'elixir-lang/vim-elixir'
+Plug 'fatih/vim-go'
+Plug 'othree/xml.vim'
+
+" Aesthetics
+Plug 'altercation/vim-colors-solarized'
+" Plug 'ryanoasis/vim-devicons'
+
+" Search and find
+Plug 'mileszs/ack.vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'tyok/nerdtree-ack'
+Plug 'ctrlpvim/ctrlp.vim'
+
+" General tools
+Plug 'jamessan/vim-gnupg'
+
+call plug#end()
 
 """""""""""""""""""""""""
 " General configurations
