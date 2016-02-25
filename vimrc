@@ -4,7 +4,7 @@ let maplocalleader = ","
 
 set nocompatible
 
-"Set up vim-plug
+" Set up vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -51,7 +51,9 @@ Plug 'fatih/vim-go'
 Plug 'othree/xml.vim'
 
 " Aesthetics
-Plug 'altercation/vim-colors-solarized'
+"Plug 'altercation/vim-colors-solarized'
+Plug 'chriskempson/base16-vim'
+Plug 'romainl/Apprentice'
 " Plug 'ryanoasis/vim-devicons'
 
 " Search and find
@@ -59,7 +61,7 @@ Plug 'mileszs/ack.vim'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'tyok/nerdtree-ack'
-Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'ctrlpvim/ctrlp.vim'
 
 " General tools
 Plug 'jamessan/vim-gnupg'
@@ -93,6 +95,11 @@ autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
 " Remove whitespace on write
 autocmd BufWritePre * :%s/\s\+$//e
+" Switch NerdTree
+"autocmd BufEnter * silent! if bufname('%') !~# 'NERD_tree_' | cd %:p:h | NERDTreeCWD | wincmd p | endif
+" Split properly
+set splitbelow
+set splitright
 
 """""""""""""""""""""""
 " Some custom mappings
@@ -105,9 +112,6 @@ map <leader>a <leader>c
 map <leader>n :NERDTree<cr>
 "Switch list on and off
 map <leader>w :set list!<cr>
-"Map Vimux commands to easily execute commands
-map <leader><space> :VimuxRunLastCommand<cr>
-map <leader>f :VimuxPromptCommand('')<cr>
 "Bring up Tagbar
 map <leader>t :TagbarToggle<cr>
 "Switch from single to double quote and vice versa
@@ -137,11 +141,12 @@ let NERDTreeIgnore = ['\.pyc$']
 " Colours and themes
 """""""""""""""""""""
 "Solarize
-let g:solarized_visibility = "high"
-let g:solarized_contrast = "high"
-let g:solarized_termtrans = 1
+"let g:solarized_visibility = "high"
+"let g:solarized_contrast = "high"
+"let g:solarized_termtrans = 1
 set background=dark
-colorscheme solarized
+"let base16colorspace=56
+colorscheme base16-railscasts
 
 """""""""""""""""""""""""
 " UltiSnipsConfiguration
@@ -226,3 +231,51 @@ let g:syntastic_json_checkers=['jsonlint']
 "map <leader>s :IndentLinesToggle<cr>
 let g:vim_markdown_folding_disabled = 1
 
+""""""""""""""""
+" Fuzzy Finder
+""""""""""""""""
+map <C-p> :FZF<space>
+map <C-o> :Ag<space>
+
+
+"""""""""""""""""""""""""""
+" Neovim configuration
+"""""""""""""""""""""""""""
+if has('nvim')
+  " Terminal Escape
+  :tnoremap <C-n> <C-\><C-n>
+
+  " Zoom mode
+  map <C-n>z :tab split<cr>
+
+  " Set up terminal
+  :tnoremap <C-n>v <C-\><C-n>:vsp \| :terminal<cr>
+  :tnoremap <C-n>s <C-\><C-n>:sp \| :terminal<cr>
+  :nnoremap <C-n>v :vsp \| :terminal<cr>
+  :nnoremap <C-n>s :sp \| :terminal<cr>
+   autocmd BufWinEnter,WinEnter term://* startinsert
+
+  " Easier to navigate
+  :tnoremap <C-n>h <C-\><C-n><C-w>h
+  :tnoremap <C-n>j <C-\><C-n><C-w>j
+  :tnoremap <C-n>k <C-\><C-n><C-w>k
+  :tnoremap <C-n>l <C-\><C-n><C-w>l
+  :nnoremap <C-n>h <C-w>h
+  :nnoremap <C-n>j <C-w>j
+  :nnoremap <C-n>k <C-w>k
+  :nnoremap <C-n>l <C-w>l
+
+  " Easy copy and paste
+  vnoremap  <leader>y  "+y
+  nnoremap  <leader>Y  "+yg_
+  nnoremap  <leader>y  "+y
+  nnoremap  <leader>yy  "+yy
+
+  " Paste from clipboard
+  nnoremap <leader>p "+p
+  nnoremap <leader>P "+P
+  vnoremap <leader>p "+p
+  vnoremap <leader>P "+P
+  tnoremap <leader><leader>p <C-\><C-n>"+p:startinsert<cr>
+  tnoremap <leader><leader>p <C-\><C-n>"+p:startinsert<cr>
+endif

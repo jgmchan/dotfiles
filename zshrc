@@ -13,7 +13,8 @@ ZSH_THEME="jeff"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ss="source ~/.zshrc"
 alias rake="noglob rake"
-alias vi="vim"
+alias vi="nvim"
+alias vim="nvim"
 
 # Set to this to use case-sensitive completion
 CASE_SENSITIVE="true"
@@ -52,7 +53,7 @@ if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 unsetopt HIST_VERIFY
 
 # Slightly modify the colours
-export LSCOLORS="Fxfxcxdxbxegedabagacad"
+#export LSCOLORS="Fxfxcxdxbxegedabagacad"
 
 # Configure chruby
 source /usr/local/opt/chruby/share/chruby/chruby.sh
