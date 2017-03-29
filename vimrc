@@ -29,17 +29,18 @@ Plug 'airblade/vim-gitgutter'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'honza/vim-snippets'
 Plug 'tpope/vim-surround'
-Plug 'jmcantrell/vim-virtualenv'
 Plug 'Valloric/YouCompleteMe'
-"Plug 'godlygeek/tabular'
-"Plug 'mattn/emmet-vim'
-"Plug 'Yggdroot/indentLine'
 
 " Language specific (syntax highlighting etc.)
+Plug 'slashmili/alchemist.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'robbles/logstash.vim'
+Plug 'neomake/neomake'
+Plug 'rust-lang/rust.vim'
 Plug 'saltstack/salt-vim'
 Plug 'smerrill/vcl-vim-plugin'
+Plug 'dag/vim2hs'
+Plug 'bitc/vim-hdevtools'
 Plug 'elzr/vim-json'
 Plug 'moll/vim-node'
 Plug 'rodjek/vim-puppet'
@@ -49,11 +50,13 @@ Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'elixir-lang/vim-elixir'
 Plug 'fatih/vim-go'
 Plug 'othree/xml.vim'
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
 " Aesthetics
 "Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/base16-vim'
 Plug 'romainl/Apprentice'
+Plug 'vim-airline/vim-airline'
 " Plug 'ryanoasis/vim-devicons'
 
 " Search and find
@@ -61,7 +64,6 @@ Plug 'mileszs/ack.vim'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'tyok/nerdtree-ack'
-"Plug 'ctrlpvim/ctrlp.vim'
 
 " General tools
 Plug 'jamessan/vim-gnupg'
@@ -117,6 +119,8 @@ map <leader>t :TagbarToggle<cr>
 "Switch from single to double quote and vice versa
 map <leader>' cs"'
 map <leader>" cs'"
+"This unsets the 'last search pattern' register by hitting return
+nnoremap <CR> :noh<CR><CR>
 
 """""""""""""""""""""""""""""
 " Filetype specific settings
@@ -125,12 +129,16 @@ map <leader>" cs'"
 autocmd Filetype go setlocal tabstop=8 softtabstop=0 shiftwidth=0 noexpandtab
 "Python
 autocmd Filetype python setlocal tabstop=4 softtabstop=4 shiftwidth=4
+"Groovy
+autocmd Filetype groovy setlocal tabstop=4 softtabstop=4 shiftwidth=4
 "Eyaml
 autocmd BufNewFile,BufRead *.eyaml set filetype=yaml
 "Markdown
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 "CloudFormation
 autocmd BufNewFile,BufReadPost *.template set filetype=json
+"Jenkinsfile
+autocmd BufNewFile,BufReadPost Jenkinsfile* set filetype=groovy
 
 """""""""""""""""""""""""""""
 " Plugin specific settings
@@ -146,7 +154,8 @@ let NERDTreeIgnore = ['\.pyc$']
 "let g:solarized_termtrans = 1
 set background=dark
 "let base16colorspace=56
-colorscheme base16-railscasts
+"colorscheme base16-paraiso
+colorscheme base16-default
 
 """""""""""""""""""""""""
 " UltiSnipsConfiguration
@@ -242,6 +251,7 @@ map <C-o> :Ag<space>
 " Neovim configuration
 """""""""""""""""""""""""""
 if has('nvim')
+  let g:python_host_prog='/usr/local/bin/python'
   " Terminal Escape
   :tnoremap <C-n> <C-\><C-n>
 
@@ -279,3 +289,36 @@ if has('nvim')
   tnoremap <leader><leader>p <C-\><C-n>"+p:startinsert<cr>
   tnoremap <leader><leader>p <C-\><C-n>"+p:startinsert<cr>
 endif
+
+"""""""""""""""""""""""""""
+" Elixir configuration
+"""""""""""""""""""""""""""
+let g:tagbar_type_elixir = {
+    \ 'ctagstype' : 'elixir',
+    \ 'kinds' : [
+        \ 'f:functions',
+        \ 'functions:functions',
+        \ 'c:callbacks',
+        \ 'd:delegates',
+        \ 'e:exceptions',
+        \ 'i:implementations',
+        \ 'a:macros',
+        \ 'o:operators',
+        \ 'm:modules',
+        \ 'p:protocols',
+        \ 'r:records'
+    \ ]
+\ }
+
+"""""""""""""""""""""""""""
+" Haskell configuration
+"""""""""""""""""""""""""""
+augroup NeomakeHaskell
+  autocmd!
+  autocmd! BufWritePost *.hs Neomake
+augroup END
+
+"""""""""""""""""""""""""""
+" Rust configuration
+"""""""""""""""""""""""""""
+let g:rustfmt_autosave = 1

@@ -37,7 +37,7 @@ DISABLE_AUTO_UPDATE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(git virtualenvwrapper)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -45,6 +45,9 @@ source $ZSH/oh-my-zsh.sh
 
 # Adjust the path for Brew Installed python
 which brew > /dev/null && export PATH=$(brew --prefix)/bin:$PATH
+
+# Do some stuff for virtualenvwrapper
+export WORKON_HOME=~/.python_envs
 
 # Set up pyenv
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
@@ -62,18 +65,12 @@ source /usr/local/opt/chruby/share/chruby/auto.sh
 # Export the .bin directory for bundler binstubs
 export PATH=.bin:$PATH
 
-# Add the ovftool
-export PATH=/Applications/VMware\ OVF\ Tool:$PATH
-
 # Source the z configuration
 . `brew --prefix`/etc/profile.d/z.sh
 
 # Set Vim bindings
 set -o vi
 bindkey "^R" history-incremental-search-backward
-
-# Turn on rednose for python nosetest
-NOSE_REDNOSE=1
 
 # Set up my GOPATH
 export GOPATH=~/workspace/scm/go
@@ -90,6 +87,10 @@ dr() {
   docker run -i -t $@ /bin/bash
 }
 
+de() {
+  docker exec -i -t $@ /bin/bash
+}
+
 # Set the JAVA_HOME
 export JAVA_HOME=`/usr/libexec/java_home`
 
@@ -97,6 +98,9 @@ export JAVA_HOME=`/usr/libexec/java_home`
 alias set_prod='source ~/.zshrc.arbor_prod'
 alias set_test='source ~/.zshrc.arbor_test'
 alias set_sync='source ~/.zshrc.arbor_sync'
+
+# Source some secret stuff
+source ~/.zshrc.secrets
 
 # Add some keys to the current shell
 ssh-add ~/.ssh/cfn_mayhem_production_rsa
@@ -106,5 +110,17 @@ ssh-add ~/.ssh/cfn_mayhem_staging_rsa
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
 
-
+# FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Python Anaconda
+#export PATH="/Users/jeff/anaconda3/bin:$PATH"
+
+# Devski
+export PATH="$HOME/.devski/bin:$PATH"
+
+# Haskell
+export PATH="$HOME/.local/bin:$PATH"
+
+# Rust
+export PATH="$HOME/.cargo/bin:$PATH"

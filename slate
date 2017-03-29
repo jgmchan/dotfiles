@@ -1,5 +1,5 @@
 #--------------------------------------------------------------------
-# Global 
+# Global
 #--------------------------------------------------------------------
 config windowHintsShowIcons true
 config windowHintsIgnoreHiddenWindows false
@@ -15,7 +15,7 @@ alias move-key ctrl,s
 # Some apps
 alias browser 'Google Chrome'
 alias irc 'Slack'
-alias terminal 'iTerm'
+alias terminal 'iTerm2'
 alias music 'iTunes'
 alias ide 'IntelliJ IDEA'
 
@@ -37,13 +37,13 @@ alias bot-left-corner move ${sox};${soy}+${ssy}/2 ${ssx}/2;${ssy}/2
 alias bot-right-corner move ${sox}+${ssx}/2;${soy}+${ssy}/2 ${ssx}/2;${ssy}/2
 
 #--------------------------------------------------------------------
-# Layouts 
+# Layouts
 #--------------------------------------------------------------------
 #layout single-monitor ${tomatoes} ${right-half}
-#layout single-monitor ${twitter} ${full} 
+#layout single-monitor ${twitter} ${full}
 
 #--------------------------------------------------------------------
-# Bindings 
+# Bindings
 #--------------------------------------------------------------------
 # Move windows to certain locations on the screen
 bind f:${move-key} ${full}
