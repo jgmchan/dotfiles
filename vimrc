@@ -16,6 +16,9 @@ call plug#begin('~/.vim/plugged')
 "Github plugins
 "
 " General Workflow
+Plug 'jiangmiao/auto-pairs'
+Plug 'Shougo/echodoc.vim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ervandew/supertab'
@@ -26,13 +29,17 @@ Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'powerman/vim-plugin-AnsiEsc'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'honza/vim-snippets'
 Plug 'tpope/vim-surround'
-Plug 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
 
 " Language specific (syntax highlighting etc.)
 Plug 'slashmili/alchemist.vim'
+Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'plasticboy/vim-markdown'
 Plug 'robbles/logstash.vim'
 Plug 'neomake/neomake'
@@ -42,15 +49,16 @@ Plug 'smerrill/vcl-vim-plugin'
 Plug 'dag/vim2hs'
 Plug 'bitc/vim-hdevtools'
 Plug 'elzr/vim-json'
+Plug 'mhinz/vim-mix-format'
 Plug 'moll/vim-node'
 Plug 'rodjek/vim-puppet'
 Plug 'vim-ruby/vim-ruby'
 Plug 'derekwyatt/vim-scala'
 Plug 'Glench/Vim-Jinja2-Syntax'
-Plug 'elixir-lang/vim-elixir'
+Plug 'elixir-editors/vim-elixir'
 Plug 'fatih/vim-go'
 Plug 'othree/xml.vim'
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+"Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
 " Aesthetics
 "Plug 'altercation/vim-colors-solarized'
@@ -67,6 +75,7 @@ Plug 'tyok/nerdtree-ack'
 
 " General tools
 Plug 'jamessan/vim-gnupg'
+Plug 'rizzatti/dash.vim'
 
 call plug#end()
 
@@ -102,6 +111,18 @@ autocmd BufWritePre * :%s/\s\+$//e
 " Split properly
 set splitbelow
 set splitright
+" Airline already tells me what mode is on
+set noshowmode
+
+" Allow hidden buffers
+set hidden
+" Move to the next buffer
+nmap <leader>l :bnext<CR>
+" Move to the previous buffer
+nmap <leader>h :bprevious<CR>
+" Close the current buffer and move to the previous one
+" This replicates the idea of closing a tab
+nmap <leader>q :bp <BAR> bd #<CR>
 
 """""""""""""""""""""""
 " Some custom mappings
@@ -155,7 +176,7 @@ let NERDTreeIgnore = ['\.pyc$']
 set background=dark
 "let base16colorspace=56
 "colorscheme base16-paraiso
-colorscheme base16-default
+colorscheme base16-default-dark
 
 """""""""""""""""""""""""
 " UltiSnipsConfiguration
@@ -163,6 +184,7 @@ colorscheme base16-default
 let g:UltiSnipsExpandTrigger = "<c-k>"
 let g:UltiSnipsJumpForwardTrigger = "<c-k>"
 let g:UltiSnipsJumpBackwardTrigger = "<c-h>"
+let g:UltiSnipsListSnippets = "<c-l>"
 
 
 """"""""""""""""""""""""""""""
@@ -224,7 +246,7 @@ let g:tagbar_type_asciidoc = {
 """""""""""""""""""""""""""
 let g:gitgutter_updatetime = 750
 
-let g:syntastic_json_checkers=['jsonlint']
+"let g:syntastic_json_checkers=['jsonlint']
 
 """"""""""""""
 " Indentation
@@ -243,15 +265,19 @@ let g:vim_markdown_folding_disabled = 1
 """"""""""""""""
 " Fuzzy Finder
 """"""""""""""""
-map <C-p> :FZF<space>
+let $FZF_DEFAULT_COMMAND = 'ag -l --skip-vcs-ignores -g ""'
+map <C-p> :FZF<cr>
 map <C-o> :Ag<space>
+map <C-i> :Buffers<cr>
+
 
 
 """""""""""""""""""""""""""
 " Neovim configuration
 """""""""""""""""""""""""""
 if has('nvim')
-  let g:python_host_prog='/usr/local/bin/python'
+  let g:python_host_prog = '/usr/local/bin/python'
+  let g:python3_host_prog = '/usr/local/bin/python3'
   " Terminal Escape
   :tnoremap <C-n> <C-\><C-n>
 
@@ -306,10 +332,11 @@ let g:tagbar_type_elixir = {
         \ 'o:operators',
         \ 'm:modules',
         \ 'p:protocols',
-        \ 'r:records'
+        \ 'r:records',
+        \ 't:tests'
     \ ]
 \ }
-
+let g:mix_format_on_save = 1
 """""""""""""""""""""""""""
 " Haskell configuration
 """""""""""""""""""""""""""
@@ -322,3 +349,45 @@ augroup END
 " Rust configuration
 """""""""""""""""""""""""""
 let g:rustfmt_autosave = 1
+let g:ycm_rust_src_path = $HOME."/.multirust/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src"
+let g:syntastic_rust_checkers = ['rustc']
+
+"""""""""""""""""""""""""""
+" Deoplete configuration
+"""""""""""""""""""""""""""
+call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#auto_complete_delay = 10
+let g:deoplete#auto_refresh_delay = 10
+let g:deoplete#enable_refresh_always = 1
+
+"""""""""""""""""""""""""""
+" Neomake configuration
+"""""""""""""""""""""""""""
+autocmd! BufWritePost * Neomake
+" Don't open the problem area until I want to with :lopen
+let g:neomake_open_list = 0
+let g:neomake_elixir_enabled_makers = ['mix', 'credo']
+
+"""""""""""""""""""""""""""
+" Supertab configuration
+"""""""""""""""""""""""""""
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
+"""""""""""""""""""""""""""
+" Dash configuration
+"""""""""""""""""""""""""""
+:nmap <silent> <leader>d <Plug>DashSearch
+
+"""""""""""""""""""""""""""
+" Airline configuration
+"""""""""""""""""""""""""""
+" Enable the list of buffers
+"let g:airline#extensions#tabline#enabled = 1
+" Show just the filename
+"let g:airline#extensions#tabline#fnamemod = ':t'
+
+"""""""""""""""""""""""""""
+" Vim JSX configuration
+"""""""""""""""""""""""""""
+let g:jsx_ext_required = 0

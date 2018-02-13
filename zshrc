@@ -37,7 +37,7 @@ DISABLE_AUTO_UPDATE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git virtualenvwrapper)
+plugins=(git docker)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -76,9 +76,6 @@ bindkey "^R" history-incremental-search-backward
 export GOPATH=~/workspace/scm/go
 export PATH=$GOPATH/bin:$PATH
 
-# Set up docker-machine
-eval $(docker-machine env)
-
 # Set the default ruby to be 2.1.0
 chruby 2.1.0
 
@@ -94,21 +91,12 @@ de() {
 # Set the JAVA_HOME
 export JAVA_HOME=`/usr/libexec/java_home`
 
-# Source some stuff for work
-alias set_prod='source ~/.zshrc.arbor_prod'
-alias set_test='source ~/.zshrc.arbor_test'
-alias set_sync='source ~/.zshrc.arbor_sync'
-
 # Source some secret stuff
 source ~/.zshrc.secrets
 
-# Add some keys to the current shell
-ssh-add ~/.ssh/cfn_mayhem_production_rsa
-ssh-add ~/.ssh/cfn_mayhem_staging_rsa
-
 # NVM
-export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
+#export NVM_DIR=~/.nvm
+#source $(brew --prefix nvm)/nvm.sh
 
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -117,10 +105,21 @@ source $(brew --prefix nvm)/nvm.sh
 #export PATH="/Users/jeff/anaconda3/bin:$PATH"
 
 # Devski
-export PATH="$HOME/.devski/bin:$PATH"
+#export PATH="$HOME/.devski/bin:$PATH"
 
 # Haskell
 export PATH="$HOME/.local/bin:$PATH"
 
 # Rust
 export PATH="$HOME/.cargo/bin:$PATH"
+
+# Google Cloud
+export GOOGLE_APPLICATION_CREDENTIALS="$HOME/.google/account.json"
+
+# Elixir/Kiex
+#test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
+export ERL_AFLAGS="-kernel shell_history enabled"
+
+# asdf
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
