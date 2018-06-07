@@ -18,13 +18,15 @@ local user_host='%{$fg[green]%}%n@%m%{$reset_color%}'
 local current_dir='%{$terminfo[bold]$fg[blue]%} %~%{$reset_color%}'
 
 # Work out which version of ruby is being used
-local ruby_version='%{$fg[red]%}‹$(ruby --version | awk '\''{print $2}'\'')›%{$reset_color%}'
+#local ruby_version='%{$fg[red]%}‹$(ruby --version | awk '\''{print $2}'\'')›%{$reset_color%}'
 
 # Work out the python version
 #local python_env='%{$fg[blue]%}<$(python --version 2>&1 | awk '\''{print $2}'\'')>%{$reset_color%}'
 
 # Work out the Elixir version
-local elixir_env='%{$fg[green]%}<$(elixir -v | grep Elixir | awk '\''{print $2}'\'')>%{$reset_color%}'
+#local elixir_env='%{$fg[green]%}<$(elixir -v | grep Elixir | awk '\''{print $2}'\'')>%{$reset_color%}'
+#local elixir_env='%{$fg[green]%}<$(elixir -v 2>&1 >/dev/null)>%{$reset_color%}'
+#local elixir_env='%{$fg[green]%}<$(asdf current elixir | awk '\''{print $2}'\'')>%{$reset_color%}'
 
 # Git plugin stuff
 local git_branch='$(git_prompt_username)$(git_prompt_info)%{$reset_color%}'

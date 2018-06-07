@@ -8,7 +8,7 @@
   co = checkout
 
 [core]
-	editor = /usr/local/bin/vim
+	editor = /usr/local/bin/nvim
 
 [http]
   sslVerify = false

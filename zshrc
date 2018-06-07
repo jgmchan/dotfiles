@@ -37,7 +37,7 @@ DISABLE_AUTO_UPDATE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git docker)
+plugins=(git kubectl docker helm)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -114,7 +114,10 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 
 # Google Cloud
-export GOOGLE_APPLICATION_CREDENTIALS="$HOME/.google/account.json"
+#export GOOGLE_APPLICATION_CREDENTIALS="$HOME/.google/account.json"
+source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
+source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
+#export GOOGLE_APPLICATION_CREDENTIALS="$HOME/.google/account.json"
 
 # Elixir/Kiex
 #test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
@@ -123,3 +126,6 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 # asdf
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
+
+# OpenSSL
+export PATH="/usr/local/opt/openssl/bin:$PATH"

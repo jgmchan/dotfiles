@@ -58,6 +58,9 @@ Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'elixir-editors/vim-elixir'
 Plug 'fatih/vim-go'
 Plug 'othree/xml.vim'
+"Plug 'prettier/vim-prettier', {
+"  \ 'do': 'yarn install',
+"  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
 "Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
 " Aesthetics
@@ -106,8 +109,6 @@ autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
 " Remove whitespace on write
 autocmd BufWritePre * :%s/\s\+$//e
-" Switch NerdTree
-"autocmd BufEnter * silent! if bufname('%') !~# 'NERD_tree_' | cd %:p:h | NERDTreeCWD | wincmd p | endif
 " Split properly
 set splitbelow
 set splitright
@@ -116,6 +117,8 @@ set noshowmode
 
 " Allow hidden buffers
 set hidden
+" Allow mouseclicks in Vim
+set mouse=a
 " Move to the next buffer
 nmap <leader>l :bnext<CR>
 " Move to the previous buffer
@@ -160,6 +163,8 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd BufNewFile,BufReadPost *.template set filetype=json
 "Jenkinsfile
 autocmd BufNewFile,BufReadPost Jenkinsfile* set filetype=groovy
+"Dockerfile
+autocmd BufNewFile,BufReadPost Dockerfile* set filetype=dockerfile
 
 """""""""""""""""""""""""""""
 " Plugin specific settings
@@ -355,7 +360,7 @@ let g:syntastic_rust_checkers = ['rustc']
 """""""""""""""""""""""""""
 " Deoplete configuration
 """""""""""""""""""""""""""
-call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
+call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_complete_delay = 10
 let g:deoplete#auto_refresh_delay = 10
@@ -391,3 +396,9 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 " Vim JSX configuration
 """""""""""""""""""""""""""
 let g:jsx_ext_required = 0
+
+"""""""""""""""""""""""""""
+" Vim Prettier configuration
+"""""""""""""""""""""""""""
+"let g:prettier#autoformat = 0
+"autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
