@@ -47,6 +47,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'saltstack/salt-vim'
 Plug 'smerrill/vcl-vim-plugin'
 Plug 'dag/vim2hs'
+Plug 'jparise/vim-graphql'
 Plug 'bitc/vim-hdevtools'
 Plug 'elzr/vim-json'
 Plug 'mhinz/vim-mix-format'
@@ -58,9 +59,9 @@ Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'elixir-editors/vim-elixir'
 Plug 'fatih/vim-go'
 Plug 'othree/xml.vim'
-"Plug 'prettier/vim-prettier', {
-"  \ 'do': 'yarn install',
-"  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'vue'] }
 "Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
 " Aesthetics
@@ -400,5 +401,5 @@ let g:jsx_ext_required = 0
 """""""""""""""""""""""""""
 " Vim Prettier configuration
 """""""""""""""""""""""""""
-"let g:prettier#autoformat = 0
-"autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.vue PrettierAsync
