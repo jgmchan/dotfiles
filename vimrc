@@ -33,8 +33,10 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'powerman/vim-plugin-AnsiEsc'
 Plug 'nathanaelkane/vim-indent-guides'
+"Plug 'terryma/vim-multiple-cursors'
 Plug 'honza/vim-snippets'
 Plug 'tpope/vim-surround'
+Plug 'janko-m/vim-test'
 " Plug 'Valloric/YouCompleteMe'
 
 " Language specific (syntax highlighting etc.)
@@ -45,6 +47,7 @@ Plug 'robbles/logstash.vim'
 Plug 'neomake/neomake'
 Plug 'rust-lang/rust.vim'
 Plug 'saltstack/salt-vim'
+Plug 'leafgarland/typescript-vim'
 Plug 'smerrill/vcl-vim-plugin'
 Plug 'dag/vim2hs'
 Plug 'jparise/vim-graphql'
@@ -146,6 +149,9 @@ map <leader>' cs"'
 map <leader>" cs'"
 "This unsets the 'last search pattern' register by hitting return
 nnoremap <CR> :noh<CR><CR>
+"Remap incrementingintegers since Ctrl-A is swallowed by TMUX
+nnoremap <C-k> <C-A>
+vnoremap g<C-k> g<C-A>
 
 """""""""""""""""""""""""""""
 " Filetype specific settings
@@ -160,6 +166,7 @@ autocmd Filetype groovy setlocal tabstop=4 softtabstop=4 shiftwidth=4
 autocmd BufNewFile,BufRead *.eyaml set filetype=yaml
 "Markdown
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+autocmd BufNewFile,BufReadPost *.mdx set filetype=markdown
 "CloudFormation
 autocmd BufNewFile,BufReadPost *.template set filetype=json
 "Jenkinsfile
@@ -276,8 +283,6 @@ map <C-p> :FZF<cr>
 map <C-o> :Ag<space>
 map <C-i> :Buffers<cr>
 
-
-
 """""""""""""""""""""""""""
 " Neovim configuration
 """""""""""""""""""""""""""
@@ -339,10 +344,12 @@ let g:tagbar_type_elixir = {
         \ 'm:modules',
         \ 'p:protocols',
         \ 'r:records',
+        \ 's:describes',
         \ 't:tests'
     \ ]
 \ }
 let g:mix_format_on_save = 1
+
 """""""""""""""""""""""""""
 " Haskell configuration
 """""""""""""""""""""""""""
@@ -403,3 +410,13 @@ let g:jsx_ext_required = 0
 """""""""""""""""""""""""""
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.vue PrettierAsync
+
+"""""""""""""""""""""""""""
+" Vim Test configuration
+"""""""""""""""""""""""""""
+nmap <silent> <C-n> :TestNearest<CR> " t Ctrl+n
+nmap <silent> <C-f> :TestFile<CR>    " t Ctrl+f
+nmap <silent> <C-l> :TestLast<CR>    " t Ctrl+l
+let test#strategy = "neovim"
+"nmap <silent> t<C-s> :TestSuite<CR>   " t Ctrl+s
+"nmap <silent> t<C-g> :TestVisit<CR>   " t Ctrl+g

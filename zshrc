@@ -56,7 +56,7 @@ if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 unsetopt HIST_VERIFY
 
 # Slightly modify the colours
-#export LSCOLORS="Fxfxcxdxbxegedabagacad"
+export LSCOLORS="Exfxcxdxbxegedabagacad"
 
 # Configure chruby
 source /usr/local/opt/chruby/share/chruby/chruby.sh
@@ -104,9 +104,6 @@ source ~/.zshrc.secrets
 # Python Anaconda
 #export PATH="/Users/jeff/anaconda3/bin:$PATH"
 
-# Devski
-#export PATH="$HOME/.devski/bin:$PATH"
-
 # Haskell
 export PATH="$HOME/.local/bin:$PATH"
 
@@ -117,7 +114,6 @@ export PATH="$HOME/.cargo/bin:$PATH"
 #export GOOGLE_APPLICATION_CREDENTIALS="$HOME/.google/account.json"
 source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
 source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
-#export GOOGLE_APPLICATION_CREDENTIALS="$HOME/.google/account.json"
 
 # Elixir/Kiex
 #test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
@@ -127,5 +123,7 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
 
-# OpenSSL
+# Brew
 export PATH="/usr/local/opt/openssl/bin:$PATH"
+export PATH="/usr/local/opt/curl/bin:$PATH"
+export PATH="/usr/local/opt/postgresql@10/bin:$PATH"

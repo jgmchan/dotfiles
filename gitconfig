@@ -9,6 +9,7 @@
 
 [core]
 	editor = /usr/local/bin/nvim
+	excludesfile = /Users/jeff/.gitignore_global
 
 [http]
   sslVerify = false
