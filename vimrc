@@ -29,60 +29,61 @@ Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
 Plug 'powerman/vim-plugin-AnsiEsc'
-Plug 'nathanaelkane/vim-indent-guides'
-"Plug 'terryma/vim-multiple-cursors'
 Plug 'honza/vim-snippets'
 Plug 'tpope/vim-surround'
 Plug 'janko-m/vim-test'
-" Plug 'Valloric/YouCompleteMe'
 
 " Language specific (syntax highlighting etc.)
 Plug 'slashmili/alchemist.vim'
 Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 Plug 'plasticboy/vim-markdown'
 Plug 'robbles/logstash.vim'
 Plug 'neomake/neomake'
 Plug 'rust-lang/rust.vim'
-Plug 'saltstack/salt-vim'
 Plug 'leafgarland/typescript-vim'
-Plug 'smerrill/vcl-vim-plugin'
-Plug 'dag/vim2hs'
 Plug 'jparise/vim-graphql'
-Plug 'bitc/vim-hdevtools'
 Plug 'elzr/vim-json'
 Plug 'mhinz/vim-mix-format'
 Plug 'moll/vim-node'
-Plug 'rodjek/vim-puppet'
 Plug 'vim-ruby/vim-ruby'
-Plug 'derekwyatt/vim-scala'
-Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'elixir-editors/vim-elixir'
 Plug 'fatih/vim-go'
 Plug 'othree/xml.vim'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'vue'] }
-"Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
 " Aesthetics
-"Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/base16-vim'
 Plug 'romainl/Apprentice'
 Plug 'vim-airline/vim-airline'
-" Plug 'ryanoasis/vim-devicons'
 
 " Search and find
-Plug 'mileszs/ack.vim'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'tyok/nerdtree-ack'
 
 " General tools
-Plug 'jamessan/vim-gnupg'
 Plug 'rizzatti/dash.vim'
+
+"No longer used plugins
+"Plug 'smerrill/vcl-vim-plugin'
+"Plug 'dag/vim2hs'
+"Plug 'bitc/vim-hdevtools'
+"Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+"Plug 'Glench/Vim-Jinja2-Syntax'
+"Plug 'rodjek/vim-puppet'
+"Plug 'altercation/vim-colors-solarized'
+"Plug 'ryanoasis/vim-devicons'
+"Plug 'mileszs/ack.vim'
+"Plug 'tyok/nerdtree-ack'
+"Plug 'terryma/vim-multiple-cursors'
+"Plug 'saltstack/salt-vim'
+"Plug 'derekwyatt/vim-scala'
+"Plug 'jamessan/vim-gnupg'
+"Plug 'nathanaelkane/vim-indent-guides'
 
 call plug#end()
 
@@ -160,8 +161,6 @@ vnoremap g<C-k> g<C-A>
 autocmd Filetype go setlocal tabstop=8 softtabstop=0 shiftwidth=0 noexpandtab
 "Python
 autocmd Filetype python setlocal tabstop=4 softtabstop=4 shiftwidth=4
-"Groovy
-autocmd Filetype groovy setlocal tabstop=4 softtabstop=4 shiftwidth=4
 "Eyaml
 autocmd BufNewFile,BufRead *.eyaml set filetype=yaml
 "Markdown
@@ -182,14 +181,14 @@ let NERDTreeIgnore = ['\.pyc$']
 """""""""""""""""""""
 " Colours and themes
 """""""""""""""""""""
-"Solarize
-"let g:solarized_visibility = "high"
-"let g:solarized_contrast = "high"
-"let g:solarized_termtrans = 1
 set background=dark
 "let base16colorspace=56
 "colorscheme base16-paraiso
 colorscheme base16-default-dark
+"Make the highlights actually readable
+hi SpellBad ctermfg=000
+hi SpellCap ctermfg=000
+
 
 """""""""""""""""""""""""
 " UltiSnipsConfiguration
@@ -199,11 +198,6 @@ let g:UltiSnipsJumpForwardTrigger = "<c-k>"
 let g:UltiSnipsJumpBackwardTrigger = "<c-h>"
 let g:UltiSnipsListSnippets = "<c-l>"
 
-
-""""""""""""""""""""""""""""""
-" YouCompleteMe Configuration
-""""""""""""""""""""""""""""""
-set completeopt=menu,menuone
 
 """"""""""""""""""""""""""""""
 " Golang Configuration
@@ -259,22 +253,6 @@ let g:tagbar_type_asciidoc = {
 """""""""""""""""""""""""""
 let g:gitgutter_updatetime = 750
 
-"let g:syntastic_json_checkers=['jsonlint']
-
-""""""""""""""
-" Indentation
-""""""""""""""
-"map <leader>s :IndentLinesToggle<cr>
-"
-"let g:indentLine_color_term = 6
-"let g:indentLine_color_gui = '#1c1c1c'
-"let g:indentLine_color_tty_light = 7
-"let g:indentLine_color_dark = 1
-
-"let g:indentLine_enabled = 0
-"map <leader>s :IndentLinesToggle<cr>
-let g:vim_markdown_folding_disabled = 1
-
 """"""""""""""""
 " Fuzzy Finder
 """"""""""""""""
@@ -288,7 +266,7 @@ map <C-i> :Buffers<cr>
 """""""""""""""""""""""""""
 if has('nvim')
   let g:python_host_prog = '/usr/local/bin/python'
-  let g:python3_host_prog = '/usr/local/bin/python3'
+  let g:python3_host_prog = expand('~/.asdf/shims/python3')
   " Terminal Escape
   :tnoremap <C-n> <C-\><C-n>
 
@@ -363,16 +341,19 @@ augroup END
 """""""""""""""""""""""""""
 let g:rustfmt_autosave = 1
 let g:ycm_rust_src_path = $HOME."/.multirust/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src"
-let g:syntastic_rust_checkers = ['rustc']
+" Default Synatastic rust checker is 'cargo'
+"let g:syntastic_rust_checkers = ['rustc']
 
 """""""""""""""""""""""""""
 " Deoplete configuration
 """""""""""""""""""""""""""
 call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#auto_complete_delay = 10
-let g:deoplete#auto_refresh_delay = 10
-let g:deoplete#enable_refresh_always = 1
+call deoplete#custom#option({
+\ 'enable_at_startup':  1,
+\ 'auto_complete_delay':  10,
+\ 'auto_refresh_delay' : 10,
+\ 'enable_refresh_always':  1,
+\ })
 
 """""""""""""""""""""""""""
 " Neomake configuration
@@ -392,13 +373,6 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 """""""""""""""""""""""""""
 :nmap <silent> <leader>d <Plug>DashSearch
 
-"""""""""""""""""""""""""""
-" Airline configuration
-"""""""""""""""""""""""""""
-" Enable the list of buffers
-"let g:airline#extensions#tabline#enabled = 1
-" Show just the filename
-"let g:airline#extensions#tabline#fnamemod = ':t'
 
 """""""""""""""""""""""""""
 " Vim JSX configuration

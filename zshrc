@@ -127,3 +127,7 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 export PATH="/usr/local/opt/openssl/bin:$PATH"
 export PATH="/usr/local/opt/curl/bin:$PATH"
 export PATH="/usr/local/opt/postgresql@10/bin:$PATH"
+
+# Gigalixir
+export PATH="~/.asdf/installs/python/3.7.6/bin:$PATH"
+
