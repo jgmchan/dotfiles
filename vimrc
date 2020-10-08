@@ -394,3 +394,7 @@ nmap <silent> <C-l> :TestLast<CR>    " t Ctrl+l
 let test#strategy = "neovim"
 "nmap <silent> t<C-s> :TestSuite<CR>   " t Ctrl+s
 "nmap <silent> t<C-g> :TestVisit<CR>   " t Ctrl+g
+
+" Disable the annoying builtin SQL mappings
+let g:omni_sql_no_default_maps = 1
+
