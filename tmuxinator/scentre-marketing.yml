@@ -1,0 +1,57 @@
+# ~/.tmuxinator/scentre-marketing.yml
+
+name: scentre-marketing
+root: ~/
+
+# Project hooks
+
+# Runs on project start, always
+on_project_start:
+  - brew services start redis
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+pre_window:
+  - 'tmux set pane-border-format "#{pane_title}"'
+  - 'tmux set pane-border-status bottom'
+
+
+windows:
+  - services:
+      layout: tiled
+      panes:
+        ### MARKETING ###
+        - commerce-service:
+          - printf '\033]2;%s\033\\' 'commerce-service'
+          - 'cd ~/scm/scentre/commerce-service; yarn dev'
+
+        - customer-service:
+          - printf '\033]2;%s\033\\' 'customer-service'
+          - 'cd ~/scm/scentre/customer-service; yarn dev'
+
+        - content-service:
+          - printf '\033]2;%s\033\\' 'content-service'
+          - 'cd ~/scm/scentre/content-service; yarn dev'
+
+        - graphql-gateway:
+          - printf '\033]2;%s\033\\' 'graphql-gateway'
+          # graphql-gateway needs to wait for the services above to come up first
+          - 'cd ~/scm/scentre/graphql-gateway; while [[ `nmap -p 5002,3003,5003 localhost | grep closed` ]]; do echo waiting; sleep 1; done; yarn dev'
+
+        - checkout-client:
+          - printf '\033]2;%s\033\\' 'checkout-client'
+          # checkout-client and commerce-admin needs to wait for graphql-gateway
+          - 'cd ~/scm/scentre/checkout-client; while [[ `nmap -p 4000 localhost | grep closed` ]]; do echo waiting; sleep 1; done; yarn dev'
+
+        - commerce-admin:
+          - printf '\033]2;%s\033\\' 'commerce-admin'
+          - 'cd ~/scm/scentre/commerce-admin; while [[ `nmap -p 4000 localhost | grep closed` ]]; do echo waiting; sleep 1; done; yarn dev'
+
+        ### IDENTITY ###
+        - identity_service:
+          - printf '\033]2;%s\033\\' 'identity_service'
+          - 'cd ~/scm/scentre/identity_service; bundle exec rails server'
+
+        - identity_client:
+          - printf '\033]2;%s\033\\' 'identity_client'
+          # identity_client needs to wait for identity_service
+          - 'cd ~/scm/scentre/identity_client; while [[ `nmap -p 3001 localhost | grep closed` ]]; do echo waiting; sleep 1; done; yarn start'
