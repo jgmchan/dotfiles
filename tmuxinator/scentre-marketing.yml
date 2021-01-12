@@ -21,37 +21,48 @@ windows:
       panes:
         ### MARKETING ###
         - commerce-service:
-          - printf '\033]2;%s\033\\' 'commerce-service'
-          - 'cd ~/scm/scentre/commerce-service; yarn dev'
+          - printf '\033]2;%s\033\\' 'commerce-service - port 5002'
+          - 'cd ~/scm/scentre/commerce-service; yarn install && yarn dev'
 
         - customer-service:
-          - printf '\033]2;%s\033\\' 'customer-service'
-          - 'cd ~/scm/scentre/customer-service; yarn dev'
+          - printf '\033]2;%s\033\\' 'customer-service - port 3003'
+          - 'cd ~/scm/scentre/customer-service; yarn install && yarn dev'
 
         - content-service:
-          - printf '\033]2;%s\033\\' 'content-service'
-          - 'cd ~/scm/scentre/content-service; yarn dev'
+          - printf '\033]2;%s\033\\' 'content-service - port 5003'
+          - 'cd ~/scm/scentre/content-service; yarn install && yarn dev'
 
         - graphql-gateway:
-          - printf '\033]2;%s\033\\' 'graphql-gateway'
+          - printf '\033]2;%s\033\\' 'graphql-gateway - port 4000'
           # graphql-gateway needs to wait for the services above to come up first
-          - 'cd ~/scm/scentre/graphql-gateway; while [[ `nmap -p 5002,3003,5003 localhost | grep closed` ]]; do echo waiting; sleep 1; done; yarn dev'
+          - 'cd ~/scm/scentre/graphql-gateway; while [[ `nmap -p 5002,3003,5003 localhost | grep closed` ]]; do echo waiting; sleep 1; done; yarn install && yarn dev'
 
         - checkout-client:
-          - printf '\033]2;%s\033\\' 'checkout-client'
+          - printf '\033]2;%s\033\\' 'checkout-client - port 4001'
           # checkout-client and commerce-admin needs to wait for graphql-gateway
           - 'cd ~/scm/scentre/checkout-client; while [[ `nmap -p 4000 localhost | grep closed` ]]; do echo waiting; sleep 1; done; yarn dev'
 
         - commerce-admin:
-          - printf '\033]2;%s\033\\' 'commerce-admin'
+          - printf '\033]2;%s\033\\' 'commerce-admin - port 4002'
           - 'cd ~/scm/scentre/commerce-admin; while [[ `nmap -p 4000 localhost | grep closed` ]]; do echo waiting; sleep 1; done; yarn dev'
 
         ### IDENTITY ###
         - identity_service:
-          - printf '\033]2;%s\033\\' 'identity_service'
-          - 'cd ~/scm/scentre/identity_service; bundle exec rails server'
+          - printf '\033]2;%s\033\\' 'identity_service - port 3001'
+          - 'cd ~/scm/scentre/identity_service; bundle install && bundle exec rails server'
 
         - identity_client:
-          - printf '\033]2;%s\033\\' 'identity_client'
+          - printf '\033]2;%s\033\\' 'identity_client - port 4567'
           # identity_client needs to wait for identity_service
-          - 'cd ~/scm/scentre/identity_client; while [[ `nmap -p 3001 localhost | grep closed` ]]; do echo waiting; sleep 1; done; yarn start'
+          - 'cd ~/scm/scentre/identity_client; while [[ `nmap -p 3001 localhost | grep closed` ]]; do echo waiting; sleep 1; done; yarn install && yarn start'
+
+        ### OTHER ###
+        - checkout-client-watch:
+          - printf '\033]2;%s\033\\' 'checkout-client-watch'
+          - 'cd ~/scm/scentre/checkout-client; yarn install && yarn build:watch'
+
+        - commerce-admin-watch:
+          - printf '\033]2;%s\033\\' 'commerce-admin-watch'
+          - 'cd ~/scm/scentre/commerce-admin; yarn install && yarn build:watch'
+
+  - main: cd ~/scm/scentre
