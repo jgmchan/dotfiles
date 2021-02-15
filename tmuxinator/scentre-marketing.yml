@@ -19,7 +19,7 @@ windows:
   - services:
       layout: tiled
       panes:
-        ### MARKETING ###
+        ### MARKETPLACE ###
         - commerce-service:
           - printf '\033]2;%s\033\\' 'commerce-service - port 5002'
           - 'cd ~/scm/scentre/commerce-service; yarn install && yarn dev'
@@ -40,7 +40,7 @@ windows:
         - checkout-client:
           - printf '\033]2;%s\033\\' 'checkout-client - port 4001'
           # checkout-client and commerce-admin needs to wait for graphql-gateway
-          - 'cd ~/scm/scentre/checkout-client; while [[ `nmap -p 4000 localhost | grep closed` ]]; do echo waiting; sleep 1; done; yarn dev'
+          - 'cd ~/scm/scentre/website_client/apps/checkout; while [[ `nmap -p 4000 localhost | grep closed` ]]; do echo waiting; sleep 1; done; yarn dev'
 
         - commerce-admin:
           - printf '\033]2;%s\033\\' 'commerce-admin - port 4002'
@@ -54,12 +54,12 @@ windows:
         - identity_client:
           - printf '\033]2;%s\033\\' 'identity_client - port 4567'
           # identity_client needs to wait for identity_service
-          - 'cd ~/scm/scentre/identity_client; while [[ `nmap -p 3001 localhost | grep closed` ]]; do echo waiting; sleep 1; done; yarn install && yarn start'
+          - 'cd ~/scm/scentre/website_client/apps/identity; while [[ `nmap -p 3001 localhost | grep closed` ]]; do echo waiting; sleep 1; done; yarn start'
 
         ### OTHER ###
         - checkout-client-watch:
           - printf '\033]2;%s\033\\' 'checkout-client-watch'
-          - 'cd ~/scm/scentre/checkout-client; yarn install && yarn build:watch'
+          - 'cd ~/scm/scentre/website_client; yarn install && cd apps/checkout && yarn build:watch'
 
         - commerce-admin-watch:
           - printf '\033]2;%s\033\\' 'commerce-admin-watch'
