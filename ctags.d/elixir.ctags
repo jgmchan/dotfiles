@@ -1,0 +1,6 @@
+# Set up a definition for `describe`
+--kinddef-Elixir=s,describes,describes (describe...)
+--regex-Elixir=/^[ \t]*describe[ \t]+\"([^"]*)\"*/\1/s/{scope=ref}
+
+# Fix up the regex for tests since it seems to be broken in Universal tags
+--regex-Elixir=/^[ \t]*test[ \t]+\"([^""]*)\"*/\1/t/{scope=ref}

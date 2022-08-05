@@ -8,7 +8,7 @@
   co = checkout
 
 [core]
-	editor = /usr/local/bin/nvim
+	editor = nvim
 	excludesfile = /Users/jeff/.gitignore_global
 
 [http]
@@ -28,3 +28,6 @@
 
 [pull]
 	ff = only
+
+[diff]
+	colorMoved = zebra

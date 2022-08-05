@@ -1,3 +1,4 @@
+#
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -12,7 +13,6 @@ ZSH_THEME="jeff"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ss="source ~/.zshrc"
-alias rake="noglob rake"
 alias vi="nvim"
 alias vim="nvim"
 
@@ -39,10 +39,15 @@ DISABLE_AUTO_UPDATE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git kubectl docker helm)
 
+# Add brew completions, MUST be done before loading oh-my-zsh
+# https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 
+# Some homebrew formulae installs the bin to here for whatever reason
 # Adjust the path for Brew Installed python
 which brew > /dev/null && export PATH=$(brew --prefix)/bin:$PATH
 
@@ -58,10 +63,6 @@ unsetopt HIST_VERIFY
 # Slightly modify the colours
 export LSCOLORS="Exfxcxdxbxegedabagacad"
 
-# Configure chruby
-source /usr/local/opt/chruby/share/chruby/chruby.sh
-source /usr/local/opt/chruby/share/chruby/auto.sh
-
 # Export the .bin directory for bundler binstubs
 export PATH=.bin:$PATH
 
@@ -76,9 +77,6 @@ bindkey "^R" history-incremental-search-backward
 export GOPATH=~/workspace/scm/go
 export PATH=$GOPATH/bin:$PATH
 
-# Set the default ruby to be 2.1.0
-chruby 2.1.0
-
 # Set some aliases for Docker
 dr() {
   docker run -i -t $@ /bin/bash
@@ -88,21 +86,11 @@ de() {
   docker exec -i -t $@ /bin/bash
 }
 
-# Set the JAVA_HOME
-export JAVA_HOME=`/usr/libexec/java_home`
-
 # Source some secret stuff
 source ~/.zshrc.secrets
 
-# NVM
-#export NVM_DIR=~/.nvm
-#source $(brew --prefix nvm)/nvm.sh
-
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# Python Anaconda
-#export PATH="/Users/jeff/anaconda3/bin:$PATH"
 
 # Haskell
 export PATH="$HOME/.local/bin:$PATH"
@@ -112,22 +100,25 @@ export PATH="$HOME/.cargo/bin:$PATH"
 
 # Google Cloud
 #export GOOGLE_APPLICATION_CREDENTIALS="$HOME/.google/account.json"
-source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
-source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
+#source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
+#source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
 
-# Elixir/Kiex
-#test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
-export ERL_AFLAGS="-kernel shell_history enabled"
+# Elixir
+export ERL_AFLAGS="-kernel shell_history enabled -kernel shell_history_path '\"$HOME/.erlang-history\"'"
+
 
 # asdf
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
+. "$(brew --prefix asdf)"/libexec/asdf.sh
 
 # Brew
-export PATH="/usr/local/opt/openssl/bin:$PATH"
-export PATH="/usr/local/opt/curl/bin:$PATH"
-export PATH="/usr/local/opt/postgresql@10/bin:$PATH"
+export PATH="$(brew --prefix openssl@1.1)/bin:$PATH"
+export PATH="$(brew --prefix curl)/bin:$PATH"
+export PATH="$(brew --prefix postgresql@11)/bin:$PATH"
+# Required to compile Erlang, 2.71 does not work.
+export PATH="$(brew --prefix autoconf@2.69)/bin:$PATH"
 
 # Gigalixir
 export PATH="~/.asdf/installs/python/3.7.6/bin:$PATH"
 
+# Sentregroup
+export VAULT_ADDR="https://vault.scentregroup.cloud"

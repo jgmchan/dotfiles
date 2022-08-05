@@ -43,7 +43,11 @@ Plug 'plasticboy/vim-markdown'
 Plug 'robbles/logstash.vim'
 Plug 'neomake/neomake'
 Plug 'rust-lang/rust.vim'
-Plug 'leafgarland/typescript-vim'
+"Plug 'leafgarland/typescript-vim'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'Quramy/tsuquyomi'
+"Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 Plug 'jparise/vim-graphql'
 Plug 'elzr/vim-json'
 Plug 'mhinz/vim-mix-format'
@@ -55,6 +59,11 @@ Plug 'othree/xml.vim'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'vue'] }
+
+"Plug 'neovim/nvim-lspconfig'
+"Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+"Plug 'nvim-treesitter/playground'
+"Plug 'kabouzeid/nvim-lspinstall'
 
 " Aesthetics
 Plug 'chriskempson/base16-vim'
@@ -119,6 +128,8 @@ set splitbelow
 set splitright
 " Airline already tells me what mode is on
 set noshowmode
+" Don't automatically fold as it's annoying
+set nofoldenable
 
 " Allow hidden buffers
 set hidden
@@ -311,20 +322,30 @@ endif
 let g:tagbar_type_elixir = {
     \ 'ctagstype' : 'elixir',
     \ 'kinds' : [
-        \ 'f:functions',
-        \ 'functions:functions',
-        \ 'c:callbacks',
-        \ 'd:delegates',
-        \ 'e:exceptions',
-        \ 'i:implementations',
-        \ 'a:macros',
-        \ 'o:operators',
-        \ 'm:modules',
         \ 'p:protocols',
+        \ 'm:modules',
+        \ 'e:exceptions',
+        \ 'y:types',
+        \ 'd:delegates',
+        \ 'f:functions',
+        \ 'c:callbacks',
+        \ 'a:macros',
+        \ 't:tests',
+        \ 'i:implementations',
+        \ 'o:operators',
         \ 'r:records',
         \ 's:describes',
-        \ 't:tests'
-    \ ]
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 'p' : 'protocol',
+        \ 'm' : 'module'
+    \ },
+    \ 'scope2kind' : {
+        \ 'protocol' : 'p',
+        \ 'module' : 'm'
+    \ },
+    \ 'sort' : 0
 \ }
 let g:mix_format_on_save = 1
 
@@ -383,6 +404,7 @@ let g:jsx_ext_required = 0
 " Vim Prettier configuration
 """""""""""""""""""""""""""
 let g:prettier#autoformat = 0
+let g:prettier#config#arrow_parens = 'always'
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.vue PrettierAsync
 
 """""""""""""""""""""""""""
@@ -398,3 +420,71 @@ let test#strategy = "neovim"
 " Disable the annoying builtin SQL mappings
 let g:omni_sql_no_default_maps = 1
 
+
+"""""""""""""""""""""""""""""""""""""
+" Typescript tsuquymoi configuration
+"""""""""""""""""""""""""""""""""""""
+let g:tsuquyomi_disable_quickfix = 1
+let g:syntastic_typescript_checkers = ['tsuquyomi']
+let g:syntastic_typescriptreact_checkers = ['tsuquyomi']
+autocmd FileType typescript nmap <buffer> <Leader>a : <C-u>echo tsuquyomi#hint()<CR>
+map <Leader>i :TsuImport<CR>
+
+
+"""""""""""""""""""""""""""""""""""""
+" Fugitive configuration
+"""""""""""""""""""""""""""""""""""""
+nmap <leader>b :Git blame<CR>
+
+
+"""""
+"" Set up nvim-lspinstall
+"""""
+"lua << EOF
+"-- ElixirLS settings
+"local elixir_settings = {
+"    elixirLS = {
+"      -- I choose to disable dialyzer for personal reasons, but
+"      -- I would suggest you also disable it unless you are well
+"      -- aquainted with dialzyer and know how to use it.
+"      dialyzerEnabled = false,
+"      -- I also choose to turn off the auto dep fetching feature.
+"      -- It often get's into a weird state that requires deleting
+"      -- the .elixir_ls directory and restarting your editor.
+"      fetchDeps = false
+"    }
+"}
+"
+"local function setup_servers()
+"  require'lspinstall'.setup()
+"  local servers = require'lspinstall'.installed_servers()
+"  for _, server in pairs(servers) do
+"    local config = {}
+"    if server == "elixir" then
+"      config.settings = elixir_settings
+"    end
+"
+"    require'lspconfig'[server].setup(config)
+"  end
+"end
+"
+"setup_servers()
+"
+"-- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
+"require'lspinstall'.post_install_hook = function ()
+"  setup_servers() -- reload installed servers
+"  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
+"end
+"EOF
+"
+""""
+"" Set up Treesitter
+""""
+"lua <<EOF
+"require'nvim-treesitter.configs'.setup {
+"  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+"  highlight = {
+"    enable = false,              -- false will disable the whole extension
+"  },
+"}
+"EOF
