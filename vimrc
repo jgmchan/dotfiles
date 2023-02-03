@@ -35,7 +35,7 @@ Plug 'tpope/vim-surround'
 Plug 'janko-m/vim-test'
 
 " Language specific (syntax highlighting etc.)
-Plug 'slashmili/alchemist.vim'
+"Plug 'slashmili/alchemist.vim'
 Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
@@ -60,7 +60,7 @@ Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'vue'] }
 
-"Plug 'neovim/nvim-lspconfig'
+Plug 'neovim/nvim-lspconfig'
 "Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 "Plug 'nvim-treesitter/playground'
 "Plug 'kabouzeid/nvim-lspinstall'
@@ -270,7 +270,11 @@ let g:gitgutter_updatetime = 750
 let $FZF_DEFAULT_COMMAND = 'ag -l --skip-vcs-ignores -g ""'
 map <C-p> :FZF<cr>
 map <C-o> :Ag<space>
+" CTRL-i and TAB are the same thing according to Tmux emulator so we need to
+" have both, not sure why this wasn't a problem before
 map <C-i> :Buffers<cr>
+map <tab> :Buffers<cr>
+
 
 """""""""""""""""""""""""""
 " Neovim configuration
@@ -436,55 +440,11 @@ map <Leader>i :TsuImport<CR>
 """""""""""""""""""""""""""""""""""""
 nmap <leader>b :Git blame<CR>
 
+"""""""""""""""""""""""""""""""""""""
+" Ultisnip configuration
+"""""""""""""""""""""""""""""""""""""
+" Add a location for custom snippets
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
 
-"""""
-"" Set up nvim-lspinstall
-"""""
-"lua << EOF
-"-- ElixirLS settings
-"local elixir_settings = {
-"    elixirLS = {
-"      -- I choose to disable dialyzer for personal reasons, but
-"      -- I would suggest you also disable it unless you are well
-"      -- aquainted with dialzyer and know how to use it.
-"      dialyzerEnabled = false,
-"      -- I also choose to turn off the auto dep fetching feature.
-"      -- It often get's into a weird state that requires deleting
-"      -- the .elixir_ls directory and restarting your editor.
-"      fetchDeps = false
-"    }
-"}
-"
-"local function setup_servers()
-"  require'lspinstall'.setup()
-"  local servers = require'lspinstall'.installed_servers()
-"  for _, server in pairs(servers) do
-"    local config = {}
-"    if server == "elixir" then
-"      config.settings = elixir_settings
-"    end
-"
-"    require'lspconfig'[server].setup(config)
-"  end
-"end
-"
-"setup_servers()
-"
-"-- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-"require'lspinstall'.post_install_hook = function ()
-"  setup_servers() -- reload installed servers
-"  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
-"end
-"EOF
-"
-""""
-"" Set up Treesitter
-""""
-"lua <<EOF
-"require'nvim-treesitter.configs'.setup {
-"  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-"  highlight = {
-"    enable = false,              -- false will disable the whole extension
-"  },
-"}
-"EOF
+" Load Lua config file for configuring Neovim in Lua (e.g. elixir-ls)
+lua require('config')

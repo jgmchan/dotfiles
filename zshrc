@@ -15,6 +15,7 @@ ZSH_THEME="jeff"
 alias ss="source ~/.zshrc"
 alias vi="nvim"
 alias vim="nvim"
+alias vimdiff="nvim -d"
 
 # Set to this to use case-sensitive completion
 CASE_SENSITIVE="true"
@@ -109,6 +110,10 @@ export ERL_AFLAGS="-kernel shell_history enabled -kernel shell_history_path '\"$
 
 # asdf
 . "$(brew --prefix asdf)"/libexec/asdf.sh
+
+# asdf Erlang
+# Install the docs into Erlang so we can take advantage of them in ElixirLS
+export KERL_BUILD_DOCS=yes
 
 # Brew
 export PATH="$(brew --prefix openssl@1.1)/bin:$PATH"
