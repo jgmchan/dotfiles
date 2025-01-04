@@ -114,11 +114,13 @@ export ERL_AFLAGS="-kernel shell_history enabled -kernel shell_history_path '\"$
 # asdf Erlang
 # Install the docs into Erlang so we can take advantage of them in ElixirLS
 export KERL_BUILD_DOCS=yes
+# Use the latest version of OpenSSL (Kerl by default pins it to OpenSSL 1.1)
+#export KERL_CONFIGURE_OPTIONS="--with-ssl=$(brew --prefix openssl)"
 
 # Brew
-export PATH="$(brew --prefix openssl@1.1)/bin:$PATH"
+#export PATH="$(brew --prefix openssl@1.1)/bin:$PATH"
 export PATH="$(brew --prefix curl)/bin:$PATH"
-export PATH="$(brew --prefix postgresql@11)/bin:$PATH"
+export PATH="$(brew --prefix postgresql@16)/bin:$PATH"
 # Required to compile Erlang, 2.71 does not work.
 export PATH="$(brew --prefix autoconf@2.69)/bin:$PATH"
 

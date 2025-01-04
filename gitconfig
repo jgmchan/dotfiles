@@ -31,3 +31,4 @@
 
 [diff]
 	colorMoved = zebra
+#  algorithm = histogram

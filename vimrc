@@ -12,6 +12,9 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+" Run a maximum of 10 jobs because there is a default maximum of 10 ssh
+" connections to Github. See https://github.com/junegunn/vim-plug/issues/1093#issuecomment-2199051597
+let g:plug_threads = 10
 
 "Github plugins
 "
@@ -22,7 +25,6 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ervandew/supertab'
-Plug 'scrooloose/syntastic'
 Plug 'majutsushi/tagbar'
 Plug 'tomtom/tcomment_vim'
 Plug 'SirVer/ultisnips'
@@ -33,6 +35,9 @@ Plug 'powerman/vim-plugin-AnsiEsc'
 Plug 'honza/vim-snippets'
 Plug 'tpope/vim-surround'
 Plug 'janko-m/vim-test'
+Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate' }
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'mbbill/undotree'
 
 " Language specific (syntax highlighting etc.)
 "Plug 'slashmili/alchemist.vim'
@@ -61,6 +66,7 @@ Plug 'prettier/vim-prettier', {
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'vue'] }
 
 Plug 'neovim/nvim-lspconfig'
+Plug 'hashivim/vim-terraform'
 "Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 "Plug 'nvim-treesitter/playground'
 "Plug 'kabouzeid/nvim-lspinstall'
@@ -93,6 +99,7 @@ Plug 'rizzatti/dash.vim'
 "Plug 'derekwyatt/vim-scala'
 "Plug 'jamessan/vim-gnupg'
 "Plug 'nathanaelkane/vim-indent-guides'
+"Plug 'scrooloose/syntastic'
 
 call plug#end()
 
@@ -142,6 +149,8 @@ nmap <leader>h :bprevious<CR>
 " Close the current buffer and move to the previous one
 " This replicates the idea of closing a tab
 nmap <leader>q :bp <BAR> bd #<CR>
+" Easily open up the registers
+nnoremap "" :registers<CR>
 
 """""""""""""""""""""""
 " Some custom mappings
@@ -161,9 +170,13 @@ map <leader>' cs"'
 map <leader>" cs'"
 "This unsets the 'last search pattern' register by hitting return
 nnoremap <CR> :noh<CR><CR>
-"Remap incrementingintegers since Ctrl-A is swallowed by TMUX
+"Remap incrementing integers since Ctrl-A is swallowed by TMUX
 nnoremap <C-k> <C-A>
 vnoremap g<C-k> g<C-A>
+" Easily move lines up and down
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
 
 """""""""""""""""""""""""""""
 " Filetype specific settings
@@ -445,6 +458,20 @@ nmap <leader>b :Git blame<CR>
 """""""""""""""""""""""""""""""""""""
 " Add a location for custom snippets
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
+
+"""""""""""""""""""""""""""""""""""""
+" Vim-terraform configuration
+"""""""""""""""""""""""""""""""""""""
+" Automatically run terraform fmt
+let g:terraform_fmt_on_save = 1
+
+"""""""""""""""""""""""""""""""""""""
+" Undotree configuration
+"""""""""""""""""""""""""""""""""""""
+" Toggle undotree
+nnoremap <leader>u :UndotreeToggle<CR>
+let g:undotree_WindowLayout = 3
+
 
 " Load Lua config file for configuring Neovim in Lua (e.g. elixir-ls)
 lua require('config')
